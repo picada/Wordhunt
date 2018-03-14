@@ -1,0 +1,118 @@
+commit 703f5d46092166ec4c04376532d8438b61ba4ea5
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 21:10:29 2018 +0200
+
+    kikkailua
+
+ tiedostoja/file1  | 0
+ tiedostoja/file2  | 0
+ tiedostoja/file22 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit a6a73e2508c68d24f319e52d4ac30cf6c429e870
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 21:07:37 2018 +0200
+
+    file3 muokattu
+
+ tiedostoja/file3 | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 447a1fc5711c1e9f11a6bc0515f7a56c5e808347
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 21:05:44 2018 +0200
+
+    many tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 6f5754e529c23bd5f4dbb2326190521421e89787
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 21:02:02 2018 +0200
+
+    muutoksia
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 6b3c54d3c14b4927fa58c85733b4676ec08c2121
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 21:00:31 2018 +0200
+
+    muutettu tiedoston nimi
+
+ eka.txt      | 13 +++++++++++++
+ tiedosto.txt | 13 -------------
+ 2 files changed, 13 insertions(+), 13 deletions(-)
+
+commit 210437815d523c57e860b6888692a4941c11bea0
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:57:10 2018 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 3570b62e895970eecb924fca4d64a7623c4895d5
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:56:21 2018 +0200
+
+    muutoksia
+
+ tiedosto.txt | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+commit b45b16116bf5ffb9cea8381f77684aecd0178a2f
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:50:59 2018 +0200
+
+    paljon tekstiä tiedostoon2
+
+ tiedosto.txt | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+commit 88abc466429ad1f6e6a08b7eb5a18d6d09656b67
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:44:31 2018 +0200
+
+    filu siirretty
+
+ filu       | 0
+ stuff/filu | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d11bf12747d1ae4ced871603f68ad4d05d3fea31
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:42:06 2018 +0200
+
+    muutoksia ja lisäyksiä
+
+ filu       | 0
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 3 files changed, 2 insertions(+)
+
+commit 52ca10fe1f70545953831c43952c4ff36b481784
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:40:47 2018 +0200
+
+    kolmas luotu
+
+ kolmas.txt   | 0
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 3 files changed, 1 insertion(+)
+
+commit 2ba95f5e1fff728bf27b8be0ac5cb136e2287d6e
+Author: picada <32310572+picada@users.noreply.github.com>
+Date:   Wed Mar 14 20:37:33 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
