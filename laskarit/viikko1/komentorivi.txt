@@ -20,5 +20,5 @@ kurssit
                                 └── unicafe
                                     └── MaksukorttiTest.java
 
-15 directories, 5 files
+15 directories, 5 files --
 	
