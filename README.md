@@ -1,13 +1,9 @@
-# Otsikko
+# OTM-harjoitustyö
 
-Tekstiä
+## Tehtävät
 
-**boldattua tekstiä**
+### Viikko1
 
-*kursiivitekstiä*
+[komentorivi.txt](https://github.com/picada/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
-## Otsikko 2
-
-Tekstiä  
-
-__Boldattua *ja* kursivoitua tekstiä__
+[gitlog.txt](https://github.com/picada/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
