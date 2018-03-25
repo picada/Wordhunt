@@ -45,6 +45,8 @@ public class KassapaateTest {
         assertEquals(100480, kassa.kassassaRahaa());
     }
 
+    
+    @Test
     public void edullistenLounaidenMaaraKasvaaKateisella() {
         kassa.syoEdullisesti(500);
         assertEquals(1, kassa.edullisiaLounaitaMyyty());
@@ -68,10 +70,11 @@ public class KassapaateTest {
         assertEquals(100800, kassa.kassassaRahaa());
     }
 
+    @Test
     public void maukkaidenLounaidenMaaraKasvaaKateisella() {
         kassa.syoMaukkaasti(500);
         assertEquals(1, kassa.maukkaitaLounaitaMyyty());
-        kassa.syoEdullisesti(400);
+        kassa.syoMaukkaasti(400);
         assertEquals(2, kassa.maukkaitaLounaitaMyyty());
     }
 
