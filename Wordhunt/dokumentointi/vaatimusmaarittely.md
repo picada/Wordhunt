@@ -63,7 +63,7 @@ Tämän jälkeen aukeaa näkymä, jossa käyttäjä voi joko aloittaa uuden peli
 
 ## Jatkokehitysideoita
 
-Perusversion jälkeen järjestelmää täydennetään voidaan täydentää esim. seuraavilla toiminnallisuuksilla
+Perusversion jälkeen järjestelmää täydennetään voidaan täydentää esim. seuraavilla toiminnallisuuksilla:
 
 - käyttäjä voi lähettää pelihaasteen toiselle käyttäjälle sovelluksen kautta
 - useampia pelivariaatioita (kesto, ruudukon koko, voidaan määrittää löydettävien sanojen määrä)
