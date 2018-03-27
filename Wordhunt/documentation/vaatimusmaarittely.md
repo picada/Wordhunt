@@ -33,6 +33,8 @@ Tämän jälkeen aukeaa näkymä, jossa käyttäjä voi joko aloittaa uuden peli
 
 - käyttäjä voi tarkastella top-listoja ja omia maksimipisteitään
   - sovellus näyttää sekä käyttäjän parhaat pisteet että top-listan, joka muodostetaan kaikkein käyttäjien parhaista pisteistä
+  
+- käyttäjä voi tarkastella pelin sääntöjä
 
 - käyttäjä voi aloittaa uuden pelin
   - alkuvaiheessa pelivariaatioita on vain yksi
