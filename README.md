@@ -1,20 +1,32 @@
-# OTM-harjoitustyö
+# Wordhunt
 
-## Tehtävät
+Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus. Kyseessä on sananetsintäpeli, jossa ideana on etsiä sovelluksen satunnaisesti asettelemasta kirjainpelilaudasta suomenkielisiä sanoja annetun ajan puitteissa. 
 
-### Viikko1
-
-[komentorivi.txt](https://github.com/picada/otm-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-[gitlog.txt](https://github.com/picada/otm-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+## Dokumentaatio
 
 
-### Viikko2
+[Vaatimusmäärittely](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/vaatimusmaarittely.md)
 
-[Viikon 2 laskareiden testikattavuus (kuva)](https://github.com/picada/otm-harjoitustyo/blob/master/laskarit/viikko2/Screenshot%20from%202018-03-26%2001-08-40.png)
+[Työaikakirjanpito](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/tuntikirjanpito.md)
 
-[Harjoitustyön vaatimusmäärittely](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/vaatimusmaarittely.md)
 
-[Harjoitustyön tuntikirjanpito](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/tuntikirjanpito.md)
+### Testaus
+
+Testit suoritetaan komennolla
+
+```
+mvn test
+```
+
+Testikattavuusraportti luodaan komennolla
+
+```
+mvn jacoco:report
+```
+
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+
+
+
 
 Sisältöä päivitetään kurssin edetessä.
