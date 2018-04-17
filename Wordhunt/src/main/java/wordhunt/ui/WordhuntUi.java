@@ -168,7 +168,7 @@ public class WordhuntUi extends Application {
 
         puzzleView.setOnAction(e -> {
 
-            wordhunt.setGame(wordhunt.getLoggedUser());
+            wordhunt.setGame();
             primaryStage.setScene(puzzleScene);
 
         });
@@ -194,36 +194,18 @@ public class WordhuntUi extends Application {
 
         Label puzzleLabel = new Label("Test puzzle");
 
-//        Game test =  new Game(10, 10);
-//        test.setBoard();
         Button createPuzzle = new Button("Create new puzzle");
-        puzzleView.setPadding(new Insets(10));
+        createPuzzle.setPadding(new Insets(10));
 
-//        puzzle = new Label(wordhunt.getPuzzle().toString());
         GridPane puzzle = new GridPane();
-//        puzzle.setGridLinesVisible(true);
-//          GridPane puzzle = new GridPane();
 
         createPuzzle.setOnAction(e -> {
 
             wordhunt.getGame().setBoard();
             help.updatePuzzle(wordhunt.getGame(), puzzle);
-//            puzzle = new Label(wordhunt.getPuzzle().toString());
-//            puzzle.setGridLinesVisible(false);
-//            puzzle.setGridLinesVisible(true);
             primaryStage.setScene(puzzleScene);
 
         });
-
-//        puzzle.setOnDragDetected(e -> {
-//            puzzle.startFullDrag();
-//            puzzle.setOnMouseDragEntered(d -> {
-//            Node source = (Node) d.getSource();
-//            Integer colIndex = GridPane.getColumnIndex(source);
-//            Integer rowIndex = GridPane.getRowIndex(source);
-//            System.out.printf("Mouse entered cell test");
-//                });
-//        });
 
         Button backToMain = new Button("Back");
         backToMain.setPadding(new Insets(10));
@@ -240,7 +222,6 @@ public class WordhuntUi extends Application {
         puzzlePane.setCenter(puzzle);
         puzzlePane.setBottom(options);
 
-//        puzzlePane.getChildren().addAll(puzzleLabel, createPuzzle, puzzle, backToMain);
         puzzleScene = new Scene(puzzlePane, 800, 650);
 
         primaryStage.setTitle("Wordhunt");

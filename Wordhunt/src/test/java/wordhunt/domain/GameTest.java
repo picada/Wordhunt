@@ -34,8 +34,7 @@ public class GameTest {
     
     @Before
     public void setUp() {
-        user = new User("un", "n");
-        game = new Game(user);
+        game = new Game();
     }
     
     @After

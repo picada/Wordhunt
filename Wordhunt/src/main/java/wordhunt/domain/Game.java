@@ -17,7 +17,6 @@ import java.util.Random;
  */
 public class Game {
 
-    private User user;
     private int points;
     private int time;
     private List<String> wordlist;
@@ -26,11 +25,10 @@ public class Game {
     private int currentx;
     private int currenty;
 
-    public Game(User user) {
+    public Game() {
         board = new Character[10][10];
         this.wordlist = new ArrayList<String>();
         this.currentword = new ArrayList<String>();
-        this.user = user;
         setWordlist("src/main/resources/sanalista.txt");
         this.time = 120;
         setBoard();
@@ -119,14 +117,6 @@ public class Game {
 
     public List<String> getCurrentword() {
         return currentword;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public int getPoints() {

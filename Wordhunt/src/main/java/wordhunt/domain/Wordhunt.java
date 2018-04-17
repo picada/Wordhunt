@@ -28,8 +28,8 @@ public class Wordhunt {
         return this.game;
     }
     
-    public void setGame(User user) {
-        this.game = new Game(user);
+    public void setGame() {
+        this.game = new Game();
     }
 
     public boolean login(String username) throws Exception {
