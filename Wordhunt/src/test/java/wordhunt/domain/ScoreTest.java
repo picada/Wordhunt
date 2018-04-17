@@ -5,6 +5,7 @@
  */
 package wordhunt.domain;
 
+import java.time.LocalDate;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,23 +19,30 @@ import static org.junit.Assert.*;
  */
 public class ScoreTest {
     
+    private Score one;
+    private Score two;
+    
     public ScoreTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
     }
     
     @Before
     public void setUp() {
+        one = new Score(200, new User("username1", "test1"));
+        two = new Score(100, new User("username2", "test2"));
     }
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void constructorWorks() {
+        assertTrue(one!=null);
+    }
+    
+    @Test
+    public void dateSetsRightWhenConstructed() {
+        assertEquals(one.getDate(), LocalDate.now());
     }
 
     // TODO add test methods here.

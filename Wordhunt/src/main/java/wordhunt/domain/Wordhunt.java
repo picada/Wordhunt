@@ -13,40 +13,45 @@ import wordhunt.database.UserDao;
  * @author katamila
  */
 public class Wordhunt {
-    
+
     private UserDao users;
     private ScoreDao scores;
     private User user;
-    
+    private Game game;
+
     public Wordhunt(UserDao userDao, ScoreDao scoreDao) {
         this.users = userDao;
         this.scores = scoreDao;
-        
+    }
+
+    public Game getGame() {
+        return this.game;
     }
     
+    public void setGame(User user) {
+        this.game = new Game(user);
+    }
+
     public boolean login(String username) throws Exception {
         User user = users.findByUsername(username);
         if (user == null) {
             return false;
         }
-        
+
         this.user = user;
-        
+
         return true;
     }
-    
-    
+
     public User getLoggedUser() {
         return user;
     }
-   
-    
-    public void logout() {
-        user = null;  
-    }
-    
 
-    public boolean createUser(String username, String name) throws Exception  {   
+    public void logout() {
+        user = null;
+    }
+
+    public boolean createUser(String username, String name) throws Exception {
         if (users.findByUsername(username) != null) {
             return false;
         }
@@ -56,5 +61,5 @@ public class Wordhunt {
         return true;
     }
     
-}
 
+}

@@ -14,28 +14,55 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author katamila
+ * @author mila
  */
 public class GameTest {
+    
+    private Game game;
+    private User user;
     
     public GameTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
+//    @BeforeClass
+//    public static void setUpClass() {
+//    }
+//    
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
     
     @Before
     public void setUp() {
+        user = new User("un", "n");
+        game = new Game(user);
     }
     
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void constructorWorks() {
+        assertTrue(game!=null);
+    }
+    
+    @Test
+    public void wordlistNotEmptyAfterConstruction() {
+        assertTrue(!game.getWordlist().isEmpty());
+    }
+    
+    @Test
+    public void currentWordNotNullAfterConstruction() {
+        assertTrue(game.getWordlist()!=null);
+    }
+    
+    @Test
+    public void boardNotNullAfterConstruction() {
+        assertTrue(game.getBoard()!=null);
+    }
+
+    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

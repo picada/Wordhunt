@@ -10,10 +10,13 @@ import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,7 +24,7 @@ import javafx.stage.Stage;
 import wordhunt.database.Database;
 import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
-import wordhunt.domain.Puzzle;
+import wordhunt.domain.Game;
 import wordhunt.domain.Wordhunt;
 
 /**
@@ -38,6 +41,9 @@ public class WordhuntUi extends Application {
     private Scene puzzleScene;
 
     private Label menuLabel = new Label();
+    private Label puzzle = new Label();
+
+    private UiHelp help;
 
     @Override
     public void init() throws Exception {
@@ -47,6 +53,7 @@ public class WordhuntUi extends Application {
         ScoreDao scores = new ScoreDao(database);
         // alustetaan sovelluslogiikka 
         wordhunt = new Wordhunt(users, scores);
+        help = new UiHelp();
     }
 
     @Override
@@ -88,7 +95,7 @@ public class WordhuntUi extends Application {
 
         loginPane.getChildren().addAll(loginMessage, inputPane, loginButton, createButton);
 
-        loginScene = new Scene(loginPane, 300, 250);
+        loginScene = new Scene(loginPane, 260, 300);
 
         // new createNewUserScene
         VBox newUserPane = new VBox(10);
@@ -136,7 +143,7 @@ public class WordhuntUi extends Application {
             }
 
         });
-        
+
         Button backToLogin = new Button("Back to login");
         backToLogin.setPadding(new Insets(10));
 
@@ -146,10 +153,9 @@ public class WordhuntUi extends Application {
 
         });
 
-
         newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newNamePane, createNewUserButton, backToLogin);
 
-        newUserScene = new Scene(newUserPane, 300, 250);
+        newUserScene = new Scene(newUserPane, 260, 300);
 
         // main scene
         VBox mainPane = new VBox(10);
@@ -157,30 +163,68 @@ public class WordhuntUi extends Application {
 
         Label mainLabel = new Label("Not much to see here... yet.");
 
-        Button createPuzzle = new Button("Create test puzzle");
-        createPuzzle.setPadding(new Insets(10));
+        Button puzzleView = new Button("Go to puzzle view");
+        puzzleView.setPadding(new Insets(10));
 
-        createPuzzle.setOnAction(e -> {
+        puzzleView.setOnAction(e -> {
 
+            wordhunt.setGame(wordhunt.getLoggedUser());
             primaryStage.setScene(puzzleScene);
 
         });
 
-        mainPane.getChildren().addAll(mainLabel, createPuzzle);
+        Button logoutButton = new Button("Logout");
+        logoutButton.setPadding(new Insets(10));
 
-        mainScene = new Scene(mainPane, 300, 250);
+        logoutButton.setOnAction(e -> {
+            wordhunt.logout();
+            primaryStage.setScene(loginScene);
+        });
+
+        mainPane.getChildren().addAll(mainLabel, puzzleView, logoutButton);
+
+        mainScene = new Scene(mainPane, 260, 300);
 
         // (test) puzzle scene
-        VBox puzzlePane = new VBox(10);
+        BorderPane puzzlePane = new BorderPane();
         puzzlePane.setPadding(new Insets(10));
 
+        VBox options = new VBox(10);
+        options.setPadding(new Insets(10));
+
         Label puzzleLabel = new Label("Test puzzle");
-        
-        Puzzle test =  new Puzzle(10, 10);
-        test.setBoard();
-        
-        Label puzzle = new Label(test.toString());
-        
+
+//        Game test =  new Game(10, 10);
+//        test.setBoard();
+        Button createPuzzle = new Button("Create new puzzle");
+        puzzleView.setPadding(new Insets(10));
+
+//        puzzle = new Label(wordhunt.getPuzzle().toString());
+        GridPane puzzle = new GridPane();
+//        puzzle.setGridLinesVisible(true);
+//          GridPane puzzle = new GridPane();
+
+        createPuzzle.setOnAction(e -> {
+
+            wordhunt.getGame().setBoard();
+            help.updatePuzzle(wordhunt.getGame(), puzzle);
+//            puzzle = new Label(wordhunt.getPuzzle().toString());
+//            puzzle.setGridLinesVisible(false);
+//            puzzle.setGridLinesVisible(true);
+            primaryStage.setScene(puzzleScene);
+
+        });
+
+//        puzzle.setOnDragDetected(e -> {
+//            puzzle.startFullDrag();
+//            puzzle.setOnMouseDragEntered(d -> {
+//            Node source = (Node) d.getSource();
+//            Integer colIndex = GridPane.getColumnIndex(source);
+//            Integer rowIndex = GridPane.getRowIndex(source);
+//            System.out.printf("Mouse entered cell test");
+//                });
+//        });
+
         Button backToMain = new Button("Back");
         backToMain.setPadding(new Insets(10));
 
@@ -190,9 +234,14 @@ public class WordhuntUi extends Application {
 
         });
 
-        puzzlePane.getChildren().addAll(puzzleLabel, puzzle, backToMain);
+        options.getChildren().addAll(createPuzzle, backToMain);
 
-        puzzleScene = new Scene(puzzlePane, 300, 250);
+        puzzlePane.setTop(puzzleLabel);
+        puzzlePane.setCenter(puzzle);
+        puzzlePane.setBottom(options);
+
+//        puzzlePane.getChildren().addAll(puzzleLabel, createPuzzle, puzzle, backToMain);
+        puzzleScene = new Scene(puzzlePane, 800, 650);
 
         primaryStage.setTitle("Wordhunt");
         primaryStage.setScene(loginScene);

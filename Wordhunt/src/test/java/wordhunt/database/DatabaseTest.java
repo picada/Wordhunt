@@ -1,4 +1,4 @@
-package wordhunt.databasee;
+package wordhunt.database;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author katamila
  */
-public class UserDaoTest {
+public class DatabaseTest {
     
-    public UserDaoTest() {
+    public DatabaseTest() {
     }
     
     @BeforeClass
