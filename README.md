@@ -9,6 +9,8 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus
 
 [Työaikakirjanpito](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/tuntikirjanpito.md)
 
+[Arkkitehtuurikuvaus (alustava luokkakaavio)](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
+
 
 ### Testaus
 
@@ -26,6 +28,16 @@ mvn jacoco:report
 
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
 
+
+### Checkstyle
+
+Tiedostoon [checkstyle.xml](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
 
 
 
