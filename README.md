@@ -4,13 +4,17 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus
 
 ## Dokumentaatio
 
-
 [Vaatimusmäärittely](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/tuntikirjanpito.md)
 
 [Arkkitehtuurikuvaus (alustava luokkakaavio)](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
 
+## Releaset
+
+[Viikko 5](https://github.com/picada/otm-harjoitustyo/releases)
+
+## Komentorivitoiminnot
 
 ### Testaus
 
@@ -39,6 +43,14 @@ Tiedostoon [checkstyle.xml](https://github.com/picada/otm-harjoitustyo/blob/mast
 
 Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
 
+### Suoritettavan jarin generointi
 
+Komento
+
+```
+mvn package
+```
+
+generoi hakemistoon _target_ suoritettavan jar-tiedoston _OtmTodoApp-1.0-SNAPSHOT.jar_
 
 Sisältöä päivitetään kurssin edetessä.
