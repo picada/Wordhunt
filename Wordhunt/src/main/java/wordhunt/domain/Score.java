@@ -14,6 +14,7 @@ import java.time.LocalDate;
  */
 public class Score {
     
+    private int id;
     private LocalDate date;
     private int score;
     private User user;

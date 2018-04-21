@@ -34,7 +34,7 @@ public class GameTest {
     
     @Before
     public void setUp() {
-        game = new Game();
+        game = new Game("sanalista.txt");
     }
     
     @After

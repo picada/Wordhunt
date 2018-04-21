@@ -32,6 +32,17 @@
         </dependency>    
     </dependencies>
     <build>
+            
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>rulesFI.txt</include>
+                    <include>sanalista.txt</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>

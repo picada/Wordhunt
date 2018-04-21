@@ -31,7 +31,7 @@ public class Database {
             Statement st = conn.createStatement();
 
             for (String command : sqliteCommands()) {
-                System.out.println("Running command >> " + command);
+                //System.out.println("Running command >> " + command);
                 st.executeUpdate(command);
             }
 
@@ -44,8 +44,8 @@ public class Database {
     private List<String> sqliteCommands() {
         ArrayList<String> commands = new ArrayList<>();
 
-        commands.add("CREATE TABLE User (username varchar(10) PRIMARY KEY, name varchar(50))");
-        commands.add("CREATE TABLE Score (id integer PRIMARY KEY, user varchar(10), score integer, time date, FOREIGN KEY (user) REFERENCES User(username))");
+        commands.add("CREATE TABLE IF NOT EXISTS User (username varchar(10) PRIMARY KEY, name varchar(50))");
+        commands.add("CREATE TABLE IF NOT EXISTS Score (id integer PRIMARY KEY, user varchar(10), score integer, time date, FOREIGN KEY (user) REFERENCES User(username))");
 
         return commands;
     }

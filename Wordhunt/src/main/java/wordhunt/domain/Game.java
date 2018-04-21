@@ -5,6 +5,10 @@
  */
 package wordhunt.domain;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,25 +24,36 @@ public class Game {
     private int points;
     private int time;
     private List<String> wordlist;
+    private List<String> collectedWords;
     private Character[][] board;
     private List<String> currentword;
     private int currentx;
     private int currenty;
 
-    public Game() {
+    public Game(String wordlist) {
         board = new Character[10][10];
         this.wordlist = new ArrayList<String>();
         this.currentword = new ArrayList<String>();
-        setWordlist("src/main/resources/sanalista.txt");
+        this.collectedWords = new ArrayList<String>();
+        setWordlist(wordlist);
         this.time = 120;
         setBoard();
     }
 
     public void setWordlist(String words) {
+
         try {
-            Files.lines(Paths.get(words)).forEach(word -> this.wordlist.add(word));
+            ClassLoader cl = this.getClass().getClassLoader();
+            InputStream in = cl.getResourceAsStream(words);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                wordlist.add(line);
+            }
+            in.close();
         } catch (Exception e) {
             System.out.println("Could not read file " + words + e);
+            e.printStackTrace();
         }
     }
 
@@ -49,6 +64,11 @@ public class Game {
                 board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
             }
         }
+    }
+
+    public void newRandomLetter(int x, int y) {
+        String chars = "aaaabcdeeeeefghhhiiiijjjjkkkkllllmmmmnnnoooopppqrrrsssstttyyuuuvxyzåääöö";
+        board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
     }
 
     public void mixBoard() {
@@ -76,7 +96,6 @@ public class Game {
         this.currenty = currenty;
     }
 
-
     public boolean isNextTo(int x, int y) {
         for (int i = y - 1; i < y + 2; i++) {
             if (i < 0 || i >= board.length) {
@@ -86,7 +105,7 @@ public class Game {
                 if (j < 0 || j >= board[i].length || (x == j && y == i)) {
                     continue;
                 }
-                if (board[j][i] == board[currentx][currenty]) {
+                if (j == currentx && i == currenty) {
                     return true;
                 }
             }
@@ -109,7 +128,15 @@ public class Game {
     public boolean isWord(String word) {
         if (wordlist.contains(word)) {
             points += word.length();
+            collectedWords.add(word);
             currentword.clear();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isNewWord(String word) {
+        if (!collectedWords.contains(word)) {
             return true;
         }
         return false;
@@ -124,7 +151,7 @@ public class Game {
     }
 
     public void setPoints(int points) {
-        this.points = points;
+        this.points += points;
     }
 
     public int getTime() {

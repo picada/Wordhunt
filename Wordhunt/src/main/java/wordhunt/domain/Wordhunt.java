@@ -5,6 +5,12 @@
  */
 package wordhunt.domain;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
 
@@ -27,9 +33,9 @@ public class Wordhunt {
     public Game getGame() {
         return this.game;
     }
-    
-    public void setGame() {
-        this.game = new Game();
+
+    public void setGame(String wordlist) {
+        this.game = new Game(wordlist);
     }
 
     public boolean login(String username) throws Exception {
@@ -60,6 +66,24 @@ public class Wordhunt {
 
         return true;
     }
-    
+
+    public String rulesFromFile(String file) {
+        StringBuilder s = new StringBuilder();
+
+        try {
+            ClassLoader cl = this.getClass().getClassLoader();
+            InputStream in = cl.getResourceAsStream(file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                s.append(line + "\n");
+            }
+            in.close();
+        } catch (Exception e) {
+            System.out.println("Could not read file " + file + e);
+
+        }
+        return s.toString();
+    }
 
 }
