@@ -177,7 +177,7 @@ public class WordhuntUi extends Application {
 
         puzzleView.setOnAction(e -> {
 
-            wordhunt.setGame("sanalista.txt");
+            wordhunt.setGame(10, 10, "sanalista.txt");
             primaryStage.setScene(puzzleScene);
 
         });

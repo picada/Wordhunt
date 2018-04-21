@@ -34,8 +34,8 @@ public class Wordhunt {
         return this.game;
     }
 
-    public void setGame(String wordlist) {
-        this.game = new Game(wordlist);
+    public void setGame(int width, int height, String wordlist) {
+        this.game = new Game(width, height, wordlist);
     }
 
     public boolean login(String username) throws Exception {

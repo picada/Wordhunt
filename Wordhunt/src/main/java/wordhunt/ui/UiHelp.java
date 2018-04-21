@@ -48,7 +48,6 @@ public class UiHelp {
                 letter.setOnAction(e -> {
                     if (puzzle.getCurrentword().isEmpty() && !clicked.contains(letter)|| puzzle.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
                         puzzle.collectLetter(letter.getText().toLowerCase());
-                        System.out.println(puzzle.buildString(puzzle.getCurrentword()));
                         word.setText(puzzle.buildString(puzzle.getCurrentword()));
                         puzzle.setCurrentx(GridPane.getColumnIndex(letter));
                         puzzle.setCurrenty(GridPane.getRowIndex(letter));
@@ -60,7 +59,6 @@ public class UiHelp {
                 grid.add(letter, x, y);
             }
         }
-
     }
 
     public void insertNewLetters(GridPane grid, Game puzzle) {

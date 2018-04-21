@@ -30,14 +30,18 @@ public class Game {
     private int currentx;
     private int currenty;
 
-    public Game(String wordlist) {
-        board = new Character[10][10];
+    public Game(int width, int height, String wordlist) {
+        board = new Character[width][height];
         this.wordlist = new ArrayList<String>();
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
         this.time = 120;
         setBoard();
+    }
+
+    public List<String> getCollectedWords() {
+        return collectedWords;
     }
 
     public void setWordlist(String words) {
@@ -73,7 +77,7 @@ public class Game {
 
     public void mixBoard() {
         setBoard();
-        time -= 20;
+        points -= 10;
     }
 
     public Character[][] getBoard() {

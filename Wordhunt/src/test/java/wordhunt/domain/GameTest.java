@@ -5,63 +5,176 @@
  */
 package wordhunt.domain;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.TemporaryFolder;
 
 /**
  *
  * @author mila
  */
 public class GameTest {
-    
+
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
+
     private Game game;
     private User user;
-    
+
     public GameTest() {
     }
-    
+
 //    @BeforeClass
 //    public static void setUpClass() {
+//        
 //    }
 //    
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
-    
     @Before
-    public void setUp() {
-        game = new Game("sanalista.txt");
+    public void setUp() throws Exception {
+
+        game = new Game(2, 2, "sanalista.txt");
+    }
+
+   
+
+    @Test
+    public void wordlistNotNullOrEmptyAfterConstruction() {
+        assertTrue(game.getWordlist() != null);
+        assertTrue(!game.getWordlist().isEmpty());
+    }
+
+    @Test
+    public void currentWordNotNullAfterConstruction() {
+        assertTrue(game.getWordlist() != null);
+    }
+
+    @Test
+    public void boardNotNullAfterConstruction() {
+        assertTrue(game.getBoard() != null);
+    }
+
+    @Test
+    public void constuctorCreatesCorrectSizedBoard() {
+        Character[][] board = game.getBoard();
+        assertEquals(2, board.length);
+        assertEquals(2, board[0].length);
+    }
+
+    @Test
+    public void setterFillsTheWholeBoard() {
+        assertTrue(game.getBoard()[0][0] != null);
+        assertTrue(game.getBoard()[0][1] != null);
+        assertTrue(game.getBoard()[1][0] != null);
+        assertTrue(game.getBoard()[1][1] != null);
+    }
+
+    // not the most optimized test for this, especially if at some point more words are added to the list
+    @Test
+    public void setWordListCollectsAllFromFile() {
+        assertEquals(94110, game.getWordlist().size());
     }
     
+    @Test
+    public void isNextToFindsAllNeighbours() {
+        game = new Game(10, 10, "sanalista.txt");
+        game.setCurrentx(3);
+        game.setCurrenty(4);
+        assertTrue(game.isNextTo(4, 4));
+        assertTrue(game.isNextTo(4, 5));
+        assertTrue(game.isNextTo(3, 5));
+        assertTrue(game.isNextTo(2, 5));
+        assertTrue(game.isNextTo(2, 4));
+        assertTrue(game.isNextTo(2, 3));
+        assertTrue(game.isNextTo(3, 3));
+        assertTrue(game.isNextTo(4, 3));
+    }
+    
+    @Test
+    public void isNextToRecognizesFalseNeighbours() {
+        game = new Game(10, 10, "sanalista.txt");
+        game.setCurrentx(3);
+        game.setCurrenty(4);
+        assertFalse(game.isNextTo(0, 0));
+        assertFalse(game.isNextTo(2, 2));
+        assertFalse(game.isNextTo(6, 6));
+    }
+    
+    @Test 
+    public void isWordRecognizesWords() {
+        ArrayList<String> testWords = new ArrayList<String>();
+        game.setWordlist(testWords);
+        testWords.add("lets");
+        testWords.add("test");
+        testWords.add("this");
+        testWords.add("thing");
+        assertTrue(game.isWord("lets"));
+        assertTrue(game.isWord("test"));
+        assertTrue(game.isWord("this"));
+        assertTrue(game.isWord("thing"));
+    }
+    
+    @Test 
+    public void recognizesFalseWords() {
+        ArrayList<String> testWords = new ArrayList<String>();
+        game.setWordlist(testWords);
+        testWords.add("lets");
+        testWords.add("test");
+        testWords.add("this");
+        testWords.add("thing");
+        assertFalse(game.isWord("alets"));
+        assertFalse(game.isWord("testa"));
+        assertTrue(game.isWord("this"));
+        assertTrue(game.isWord("thing"));
+    }
+    
+    @Test 
+    public void isNewWordsRecognizesDoubles() {
+        game.getCollectedWords().add("lets");
+        game.getCollectedWords().add("test");
+        game.getCollectedWords().add("this");
+        game.getCollectedWords().add("thing");
+        assertFalse(game.isNewWord("lets"));
+        assertFalse(game.isNewWord("test"));
+        assertTrue(game.isNewWord("thisa"));
+        assertTrue(game.isNewWord("thinga"));
+    }
+    
+    // not the perfect test: since the method is using random, it's basically possible that all the cells remain the same
+    // after random - highly unlikely though
+    
+    @Test
+    public void newRandomLetterChangesCellContent() {
+        Character a = game.getBoard()[0][0];
+        Character b = game.getBoard()[0][1];
+        Character c = game.getBoard()[1][1];
+        game.newRandomLetter(0, 0);
+        game.newRandomLetter(0, 1);
+        game.newRandomLetter(1, 1);
+        Character d = game.getBoard()[0][0];
+        Character e = game.getBoard()[0][1];
+        Character f = game.getBoard()[1][1];
+        
+        boolean result = (a == d && b == e && c == f);
+        
+        assertFalse(result);    
+    }
+
     @After
     public void tearDown() {
     }
-    
-    @Test
-    public void constructorWorks() {
-        assertTrue(game!=null);
-    }
-    
-    @Test
-    public void wordlistNotEmptyAfterConstruction() {
-        assertTrue(!game.getWordlist().isEmpty());
-    }
-    
-    @Test
-    public void currentWordNotNullAfterConstruction() {
-        assertTrue(game.getWordlist()!=null);
-    }
-    
-    @Test
-    public void boardNotNullAfterConstruction() {
-        assertTrue(game.getBoard()!=null);
-    }
-
-    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
