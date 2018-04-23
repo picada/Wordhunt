@@ -29,6 +29,7 @@ public class Game {
     private List<String> currentword;
     private int currentx;
     private int currenty;
+    private boolean gameOn;
 
     public Game(int width, int height, String wordlist) {
         board = new Character[width][height];
@@ -38,6 +39,7 @@ public class Game {
         setWordlist(wordlist);
         this.time = 120;
         setBoard();
+        this.gameOn = false;
     }
 
     public List<String> getCollectedWords() {
@@ -165,6 +167,16 @@ public class Game {
     public void setTime(int time) {
         this.time = time;
     }
+    
+    public void tick() {
+        this.time --;
+    }
+    
+    public String showTimeMinSec() {
+        int minutes = this.time / 60;
+        int seconds = time % 60;
+        return String.format("%02d:%02d", minutes, seconds);
+    }
 
     public List<String> getWordlist() {
         return wordlist;
@@ -173,12 +185,21 @@ public class Game {
     public void setWordlist(List<String> wordlist) {
         this.wordlist = wordlist;
     }
+    
+    public void startGame() {
+        this.gameOn = true;
+    }
 
     public boolean gameOver() {
         if (time <= 0) {
-            return true;
+            this.gameOn = false;
+            return true;    
         }
         return false;
+    }
+    
+    public boolean getGameOn() {
+        return this.gameOn;
     }
 
 }

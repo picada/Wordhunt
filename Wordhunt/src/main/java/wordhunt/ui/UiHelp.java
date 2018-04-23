@@ -46,7 +46,9 @@ public class UiHelp {
                 letter.setMinSize(50, 50);
                 letter.setFont(Font.font("Calibri", 15));
                 letter.setOnAction(e -> {
-                    if (puzzle.getCurrentword().isEmpty() && !clicked.contains(letter)|| puzzle.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
+                    if (puzzle.getCurrentword().isEmpty() && !clicked.contains(letter)|| 
+                            puzzle.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))
+                            && !puzzle.gameOver()) {
                         puzzle.collectLetter(letter.getText().toLowerCase());
                         word.setText(puzzle.buildString(puzzle.getCurrentword()));
                         puzzle.setCurrentx(GridPane.getColumnIndex(letter));
