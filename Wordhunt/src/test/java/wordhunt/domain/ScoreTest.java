@@ -27,8 +27,8 @@ public class ScoreTest {
     
     @Before
     public void setUp() {
-        one = new Score(200, new User("username1", "test1"));
-        two = new Score(100, new User("username2", "test2"));
+        one = new Score(200, new User("username1", "test1"), LocalDate.now());
+        two = new Score(100, new User("username2", "test2"), LocalDate.now());
     }
     
     @After
@@ -40,10 +40,10 @@ public class ScoreTest {
         assertTrue(one!=null);
     }
     
-    @Test
-    public void dateSetsRightWhenConstructed() {
-        assertEquals(one.getDate(), LocalDate.now());
-    }
+//    @Test
+//    public void dateSetsRightWhenConstructed() {
+//        assertEquals(one.getDate(), LocalDate.now());
+//    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:

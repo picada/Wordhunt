@@ -5,6 +5,7 @@
  */
 package wordhunt.ui;
 
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -61,6 +62,7 @@ public class WordhuntUi extends Application {
         database.init();
         UserDao users = new UserDao(database);
         ScoreDao scores = new ScoreDao(database);
+        
         // alustetaan sovelluslogiikka 
         wordhunt = new Wordhunt(users, scores);
         help = new UiHelp();
@@ -290,8 +292,11 @@ public class WordhuntUi extends Application {
                     countdown.stop();
                     if (wordhunt.getGame().gameOver()) {
                         timeLeft.setText("game over");
-                        Score newScore = new Score(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser());
-                        System.out.println(newScore.getDate());
+                        try {
+                            wordhunt.createScore(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser(), LocalDate.now());
+                        } catch (Exception ex) {
+                            Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 });
             }
@@ -315,6 +320,7 @@ public class WordhuntUi extends Application {
             primaryStage.setScene(puzzleScene);
 
         });
+        
 
         backToMain.setOnAction(e -> {
 

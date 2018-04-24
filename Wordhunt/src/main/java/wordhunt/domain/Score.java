@@ -7,6 +7,7 @@ package wordhunt.domain;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -16,34 +17,41 @@ public class Score {
     
     private int id;
     private LocalDate date;
-    private int score;
+    private int points;
     private User user;
     
-    public Score(int points, User player) {
-        this.score = points;
+    public Score(int points, User player, LocalDate date) {
+        this.points = points;
         this.user = player;
-        this.date = LocalDate.now();
+//        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMMdd");
+//        this.date = f.toString();
+        this.date = date;
     }
 
     public LocalDate getDate() {
         return date;
     }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+    
+
+    public int getPoints() {
+        return points;
+    }
 //
-//    public void setDate(LocalDate date) {
-//        this.date = date;
+//    public void setScore(int points) {
+//        this.points = points;
 //    }
 //
-//    public int getScore() {
-//        return score;
-//    }
-//
-//    public void setScore(int score) {
-//        this.score = score;
-//    }
-//
-//    public User getUser() {
-//        return user;
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
 //
 //    public void setUser(User user) {
 //        this.user = user;

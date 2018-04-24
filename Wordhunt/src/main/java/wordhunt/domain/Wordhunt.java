@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
 
@@ -84,6 +85,16 @@ public class Wordhunt {
 
         }
         return s.toString();
+    }
+    
+    public boolean createScore(int points, User user, LocalDate date) throws Exception {
+        if (!this.getGame().gameOver()) {
+            return false;
+        }
+        Score score = new Score(points, user, date);
+        scores.create(score);
+
+        return true;
     }
 
 }

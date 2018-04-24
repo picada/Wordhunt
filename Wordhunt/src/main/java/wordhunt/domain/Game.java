@@ -37,7 +37,7 @@ public class Game {
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
-        this.time = 120;
+        this.time = 10;
         setBoard();
         this.gameOn = false;
     }

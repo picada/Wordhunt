@@ -5,25 +5,42 @@
  */
 package wordhunt.database;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import wordhunt.domain.Score;
+import wordhunt.domain.User;
+import java.sql.Date;
 
 /**
  *
  * @author katamila
  */
 public class ScoreDao implements Dao<Score, Integer> {
-    
+
     private Database database;
-    
+    private UserDao userdao;
+
     public ScoreDao(Database db) {
         database = db;
+        this.userdao = new UserDao(db);
     }
 
     @Override
     public Score findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("SELECT user, score, time FROM Score WHERE id = ?");
+            stmt.setInt(1, key);
+
+            ResultSet result = stmt.executeQuery();
+            if (!result.next()) {
+                return null;
+            }
+
+            return new Score(result.getInt("score"), userdao.findByUsername(result.getString("user")),  result.getDate("time").toLocalDate());
+        }
     }
 
     @Override
@@ -32,13 +49,29 @@ public class ScoreDao implements Dao<Score, Integer> {
     }
 
     @Override
-    public Score create(Score object) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Score create(Score score) throws SQLException {
+        
+        int scoreid;
+        
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Score (id, user, score, time) VALUES (?, ?, ?, ?)");
+            stmt.setString(2, score.getUser().getUsername());
+            stmt.setInt(3, score.getPoints());
+            stmt.setDate(4, Date.valueOf(score.getDate()));
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("SELECT MAX(id) AS id FROM Score");
+            ResultSet rs = stmt.executeQuery();
+            scoreid = rs.getInt("id");
+            System.out.println(scoreid);
+            rs.close();
+        }
+        System.out.println(findOne(scoreid).getDate());
+        return findOne(scoreid);
     }
 
     @Override
     public void delete(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
