@@ -12,4 +12,5 @@
 |20.4. | 4    | pelitoiminnallisuuksien kehittäminen, alustavien sääntöjen kirjoittaminen ja lisääminen sovellukseen, sovelluksen kielen vaihto suomeksi  |
 |21.4. | 2    | jar (ml. tarvittavien tiedostojen upottaminen jariin) + lisää testejä  |
 |23.4. | 3    | pelikierroksen keston säätely, tuloksen luominen ajan loppuessa (ei vielä tallennusta tietokantaan), sovelluslogiikan hiominen  |
-| yht   | 33    | 
+|24.4. | 2    | käyttöliittymän siistimistä, lisää testejä, sekvenssikaavio  |
+| yht   | 35    | 
