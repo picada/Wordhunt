@@ -171,6 +171,19 @@ public class GameTest {
         
         assertFalse(result);    
     }
+    
+    @Test 
+    public void buildStringReturnsCollectStringFromList() {
+        game.getCurrentword().add("c");
+        game.getCurrentword().add("a");
+        game.getCurrentword().add("t");
+        assertEquals("cat", game.buildString(game.getCurrentword()));
+        game.getCurrentword().clear();
+        game.getCurrentword().add("d");
+        game.getCurrentword().add("o");
+        game.getCurrentword().add("g");
+        assertEquals("dog", game.buildString(game.getCurrentword()));
+    } 
 
     @After
     public void tearDown() {

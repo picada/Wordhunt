@@ -40,10 +40,10 @@ public class ScoreTest {
         assertTrue(one!=null);
     }
     
-//    @Test
-//    public void dateSetsRightWhenConstructed() {
-//        assertEquals(one.getDate(), LocalDate.now());
-//    }
+    @Test
+    public void dateSetsRightWhenConstructed() {
+        assertEquals(one.getDate(), LocalDate.now());
+    }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
