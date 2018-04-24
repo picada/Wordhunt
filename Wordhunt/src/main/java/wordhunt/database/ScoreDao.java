@@ -62,7 +62,6 @@ public class ScoreDao implements Dao<Score, Integer> {
             stmt = conn.prepareStatement("SELECT MAX(id) AS id FROM Score");
             ResultSet rs = stmt.executeQuery();
             scoreid = rs.getInt("id");
-            System.out.println(scoreid);
             rs.close();
         }
         System.out.println(findOne(scoreid).getDate());

@@ -14,18 +14,15 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import javax.swing.ButtonModel;
 import wordhunt.domain.Game;
 import wordhunt.domain.Wordhunt;
 
@@ -55,7 +52,15 @@ public class UiHelp {
                 letter.setMinSize(50, 50);
                 letter.setFont(Font.font("Calibri", 15));
                 letter.setOnAction(e -> {
-                    if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
+                    letterClickAction(game, letter, word, valid);
+                });
+                grid.add(letter, x, y);
+            }
+        }
+    }
+    
+    public void letterClickAction(Game game, Button letter, Label word, Label valid) {
+        if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
                             || !game.gameOver() && game.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
                         game.collectLetter(letter.getText().toLowerCase());
                         word.setText(game.buildString(game.getCurrentword()));
@@ -65,10 +70,6 @@ public class UiHelp {
                         clicked.add(letter);
                     }
                     valid.setText("");
-                });
-                grid.add(letter, x, y);
-            }
-        }
     }
 
     public void startOrShuffleAction(Wordhunt wordhunt, Label points) {
