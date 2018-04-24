@@ -42,13 +42,12 @@ public class GameTest {
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
+    
     @Before
     public void setUp() throws Exception {
 
         game = new Game(2, 2, "sanalista.txt");
     }
-
-   
 
     @Test
     public void wordlistNotNullOrEmptyAfterConstruction() {
@@ -74,11 +73,29 @@ public class GameTest {
     }
 
     @Test
-    public void setterFillsTheWholeBoard() {
+    public void setBoardFillsTheWholeBoard() {
         assertTrue(game.getBoard()[0][0] != null);
         assertTrue(game.getBoard()[0][1] != null);
         assertTrue(game.getBoard()[1][0] != null);
         assertTrue(game.getBoard()[1][1] != null);
+    }
+    
+    @Test 
+    public void mixBoardReducesPoints() {
+        game.setPoints(20);
+        game.mixBoard();
+        assertEquals(10, game.getPoints());
+        game.mixBoard();
+        assertEquals(0, game.getPoints());
+    }
+    
+    @Test 
+    public void mixBoardDoesntTakePointsBelowZero() {
+       game.mixBoard();
+       assertEquals(0, game.getPoints());
+       game.setPoints(2);
+       game.mixBoard();
+       assertEquals(0, game.getPoints());
     }
 
     // not the most optimized test for this, especially if at some point more words are added to the list
@@ -170,6 +187,16 @@ public class GameTest {
         boolean result = (a == d && b == e && c == f);
         
         assertFalse(result);    
+    }
+    
+    @Test
+    public void collectLetterCollects() {
+        game.collectLetter("c");
+        assertEquals("c", game.getCurrentword().get(game.getCurrentword().size()-1));
+        game.collectLetter("a");
+        assertEquals("a", game.getCurrentword().get(game.getCurrentword().size()-1));
+        game.collectLetter("t");
+        assertEquals("t", game.getCurrentword().get(game.getCurrentword().size()-1));
     }
     
     @Test 

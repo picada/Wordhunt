@@ -5,9 +5,14 @@
  */
 package wordhunt.ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.geometry.Pos;
@@ -19,12 +24,16 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 import javax.swing.ButtonModel;
 import wordhunt.domain.Game;
+import wordhunt.domain.Wordhunt;
 
 /**
  *
  * @author mila
+ *
+ * this class handles the more complicated mouse events
  */
 public class UiHelp {
 
@@ -34,10 +43,10 @@ public class UiHelp {
         this.clicked = new ArrayList<>();
     }
 
-    public void updatePuzzle(Game puzzle, GridPane grid, Label word, Label valid) {
+    public void updatePuzzle(Game game, GridPane grid, Label word, Label valid) {
         grid.getChildren().clear();
 
-        Character[][] letters = puzzle.getBoard();
+        Character[][] letters = game.getBoard();
 
         for (int x = 0; x < letters.length; x++) {
             for (int y = 0; y < letters[x].length; y++) {
@@ -46,13 +55,12 @@ public class UiHelp {
                 letter.setMinSize(50, 50);
                 letter.setFont(Font.font("Calibri", 15));
                 letter.setOnAction(e -> {
-                    if (puzzle.getCurrentword().isEmpty() && !clicked.contains(letter)|| 
-                            puzzle.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))
-                            && !puzzle.gameOver()) {
-                        puzzle.collectLetter(letter.getText().toLowerCase());
-                        word.setText(puzzle.buildString(puzzle.getCurrentword()));
-                        puzzle.setCurrentx(GridPane.getColumnIndex(letter));
-                        puzzle.setCurrenty(GridPane.getRowIndex(letter));
+                    if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
+                            || !game.gameOver() && game.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
+                        game.collectLetter(letter.getText().toLowerCase());
+                        word.setText(game.buildString(game.getCurrentword()));
+                        game.setCurrentx(GridPane.getColumnIndex(letter));
+                        game.setCurrenty(GridPane.getRowIndex(letter));
                         letter.setStyle("-fx-background-color:yellow;");
                         clicked.add(letter);
                     }
@@ -63,11 +71,67 @@ public class UiHelp {
         }
     }
 
-    public void insertNewLetters(GridPane grid, Game puzzle) {
+    public void startOrShuffleAction(Wordhunt wordhunt, Label points) {
+        if (!wordhunt.getGame().getGameOn()) {
+            wordhunt.getGame().setBoard();
+            wordhunt.getGame().startGame();
+        } else {
+            wordhunt.getGame().mixBoard();
+            points.setText("" + wordhunt.getGame().getPoints());
+            wordhunt.getGame().getCurrentword().clear();
+        }
+    }
+
+    public Timeline startCountdownIfGameNotOn(Timeline countdown, Game game, Label timeLeft) {
+        if (!game.getGameOn() && !game.gameOver()) {
+
+            countdown = new Timeline(
+                    new KeyFrame(Duration.seconds(1), ee -> {
+                        game.tick();
+                        timeLeft.setText(game.showTimeMinSec());
+                    })
+            );
+            countdown.setCycleCount(game.getTime());
+            countdown.play();
+
+            return countdown;
+        }
+        return countdown;
+    }
+
+    public boolean saveScore(Wordhunt wordhunt, Timeline countdown, Label timeLeft) {
+        if (wordhunt.getGame().gameOver()) {
+            try {
+                wordhunt.createScore(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser(), LocalDate.now());
+                return true;
+            } catch (Exception ex) {
+                Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
+    }
+
+    public boolean acceptedWord(Game game, Label word, Label valid, Label points) {
+        if (!game.isNewWord(word.getText())) {
+            valid.setText("Sana on jo syötetty");
+            return false;
+        } else if (game.isWord(word.getText())) {
+            game.setPoints(word.getText().length());
+            valid.setText("Sana hyväksytty");
+            points.setText("" + game.getPoints());
+            word.setText("");
+            return true;
+        } else {
+            valid.setText("Sana ei hyväksytty");
+        }
+        return false;
+    }
+
+    public void insertNewLetters(GridPane grid, Game game) {
 
         grid.getChildren().stream().filter(n -> clicked.contains(n))
-                .forEach(n -> puzzle.newRandomLetter(GridPane.getColumnIndex(n), 
-                        GridPane.getRowIndex(n))
+                .forEach(n -> game.newRandomLetter(GridPane.getColumnIndex(n),
+                GridPane.getRowIndex(n))
                 );
     }
 

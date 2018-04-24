@@ -1,7 +1,7 @@
-under construction --> (Pelissä on 2 minuuttia aikaa etsiä ruudukosta 
-mahdollisimman monta suomenkielistä sanaa)
+Pelissä on 2 minuuttia aikaa etsiä ruudukosta 
+mahdollisimman monta suomenkielistä sanaa
 
-Sanojen tulee olla perusmuodossa, erisnimiä ei hyväksytä
+Sanojen tulee olla perusmuodossa, pelkkiä erisnimiä ei hyväksytä
 
 Sanoja kerätään valitsemalla kirjaimet ruudukosta 
 hiirivalinnalla yksi kirjain kerrallaan
@@ -10,19 +10,20 @@ Seuraavan kirjaimen tulee sijaita edellisen valitun ruudun vieressä
 joko pysty-, vaaka- tai vinosuunnassa
 
 Sana päivittyy reaaliajassa sivun oikeaan laitaan, ja sanan voi syöttää 
-järjestelmään painamalla ”Valmis”-nappia
+järjestelmään painamalla ”Syötä sana”-nappia
 
 Mikäli sana on hyväksytty suomen kielen sana, pistesaldo kasvaa sanan 
-pituuden mukaan (2 pistettä per kirjain)
+pituuden mukaan (2 pistettä per kirjain) --> pisteytys muuttunee vielä
 
 Hyväksytty sana poistetaan laudalta ja tilalle arvotaan uudet 
 kirjaimet
 
 Samaa sanaa ei voi syöttää useampaa kertaa saman pelin aikana
 
-Kirjainruudukon voi sekoittaa pelin aikana painamalla ”Sekoita” 
--nappia - jokainen sekoitus kuitenkin vähentää pelikellon aikaa 10 
-sekunnilla (tai vähentää pisteitä, ei varmaa vielä)
+Kirjainruudukon voi sekoittaa pelin aikana painamalla ”Sekoita pelilauta” 
+-nappia - jokainen sekoitus kuitenkin vähentää pistesaldoa 10 pisteellä
+
+Ajan loppuessa pelaajan pisteet tallentuvat tietokantaan
 
 Mikäli pelaaja poistuu kesken pelikierroksen, pisteet eivät tallennu 
 

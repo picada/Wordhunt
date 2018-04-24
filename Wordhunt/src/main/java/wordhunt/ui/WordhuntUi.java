@@ -62,7 +62,7 @@ public class WordhuntUi extends Application {
         database.init();
         UserDao users = new UserDao(database);
         ScoreDao scores = new ScoreDao(database);
-        
+
         // alustetaan sovelluslogiikka 
         wordhunt = new Wordhunt(users, scores);
         help = new UiHelp();
@@ -260,9 +260,6 @@ public class WordhuntUi extends Application {
         HBox options = new HBox(10);
         options.setPadding(new Insets(10));
 
-//        Label puzzleLabel = new Label("Wordhunt");
-//        puzzleLabel.setPadding(new Insets(10));
-//        puzzleLabel.setStyle("-fx-font-weight: bold;-fx-font-size: 20");
         Button startOrShuffle = new Button("Aloita peli");
         startOrShuffle.setPadding(new Insets(10));
 
@@ -271,45 +268,31 @@ public class WordhuntUi extends Application {
 
         HBox bottom = new HBox(10);
 
+        timeLeft.setStyle("-fx-font-weight: bold; -fx-font-size: 30;");
         bottom.getChildren().addAll(timeLeft);
 
-        // functionality for start/shuffle, starts countdown when game starts
+
+        // functionality for start/shuffle, starts countdown when game started
+        
         startOrShuffle.setOnAction(e -> {
 
-            if (!wordhunt.getGame().getGameOn() && !wordhunt.getGame().gameOver()) {
+            countdown = help.startCountdownIfGameNotOn(countdown, wordhunt.getGame(), timeLeft);
 
-                countdown = new Timeline(
-                        new KeyFrame(Duration.seconds(1), ee -> {
-                            wordhunt.getGame().tick();
-                            System.out.println(wordhunt.getGame().getTime());
-                            timeLeft.setText(wordhunt.getGame().showTimeMinSec());
-                        })
-                );
+            countdown.setCycleCount(wordhunt.getGame().getTime());
+            countdown.play();
 
-                countdown.setCycleCount(wordhunt.getGame().getTime());
-                countdown.play();
-                countdown.setOnFinished(ee -> {
-                    countdown.stop();
-                    if (wordhunt.getGame().gameOver()) {
-                        timeLeft.setText("game over");
-                        try {
-                            wordhunt.createScore(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser(), LocalDate.now());
-                        } catch (Exception ex) {
-                            Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                });
-            }
+            countdown.setOnFinished(ee -> {
+                countdown.stop();
 
-            if (!wordhunt.getGame().getGameOn()) {
-                wordhunt.getGame().setBoard();
-                wordhunt.getGame().startGame();
-            } else {
-                wordhunt.getGame().mixBoard();
-                points.setText(""+wordhunt.getGame().getPoints());
-                wordhunt.getGame().getCurrentword().clear();
-            }
-            
+                if (help.saveScore(wordhunt, countdown, timeLeft)) {
+                    backToMain.setText("Takaisin valikkoon");
+                    timeLeft.setText("game over- final score:" + wordhunt.getGame().getPoints());
+                }
+
+            });
+
+            help.startOrShuffleAction(wordhunt, points);
+
             word.setText("");
             startOrShuffle.setText("Sekoita pelilauta");
             backToMain.setText("Keskeytä peli (tulosta ei tallenneta)");
@@ -321,6 +304,7 @@ public class WordhuntUi extends Application {
 
         });
         
+        // takes the user back to main
 
         backToMain.setOnAction(e -> {
 
@@ -335,21 +319,18 @@ public class WordhuntUi extends Application {
 
         options.getChildren().addAll(startOrShuffle, backToMain);
 
+        // checks if the word is valid and saves points if true
+        
         sendWord.setOnAction(e -> {
 
-            if (!wordhunt.getGame().isNewWord(word.getText())) {
-                valid.setText("Sana on jo syötetty");
-            } else if (wordhunt.getGame().isWord(word.getText())) {
-                wordhunt.getGame().setPoints(word.getText().length());
-                valid.setText("Sana hyväksytty");
-                points.setText("" + wordhunt.getGame().getPoints());
-                word.setText("");
+            if (help.acceptedWord(wordhunt.getGame(), word, valid, points)) {
                 help.insertNewLetters(puzzle, wordhunt.getGame());
                 help.updatePuzzle(wordhunt.getGame(), puzzle, word, valid);
-            } else {
-                valid.setText("Sana ei hyväksytty");
             }
+
         });
+        
+        // clears current word
 
         clearWord.setOnAction(e -> {
 
@@ -362,6 +343,7 @@ public class WordhuntUi extends Application {
         puzzlePane.setCenter(puzzle);
         puzzlePane.setRight(newWord);
         puzzlePane.setBottom(bottom);
+        bottom.setAlignment(Pos.CENTER);
         newWord.setAlignment(Pos.TOP_LEFT);
         newWord.setPrefWidth(250);
 

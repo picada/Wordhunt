@@ -6,11 +6,8 @@
 package wordhunt.domain;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +34,7 @@ public class Game {
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
-        this.time = 10;
+        this.time = 120;
         setBoard();
         this.gameOn = false;
     }
@@ -79,7 +76,11 @@ public class Game {
 
     public void mixBoard() {
         setBoard();
-        points -= 10;
+        if (points <= 10) {
+            points = 0;
+        } else {
+            points -= 10;
+        }
     }
 
     public Character[][] getBoard() {
@@ -167,11 +168,11 @@ public class Game {
     public void setTime(int time) {
         this.time = time;
     }
-    
+
     public void tick() {
-        this.time --;
+        this.time--;
     }
-    
+
     public String showTimeMinSec() {
         int minutes = this.time / 60;
         int seconds = time % 60;
@@ -185,7 +186,7 @@ public class Game {
     public void setWordlist(List<String> wordlist) {
         this.wordlist = wordlist;
     }
-    
+
     public void startGame() {
         this.gameOn = true;
     }
@@ -193,11 +194,11 @@ public class Game {
     public boolean gameOver() {
         if (time <= 0) {
             this.gameOn = false;
-            return true;    
+            return true;
         }
         return false;
     }
-    
+
     public boolean getGameOn() {
         return this.gameOn;
     }
