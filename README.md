@@ -8,7 +8,7 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus
 
 [Työaikakirjanpito](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/tuntikirjanpito.md)
 
-[Arkkitehtuurikuvaus (alustava luokkakaavio)](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
+[Arkkitehtuurikuvaus](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
 
 ## Releaset
 
