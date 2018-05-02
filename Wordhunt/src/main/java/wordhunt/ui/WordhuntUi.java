@@ -338,7 +338,7 @@ public class WordhuntUi extends Application {
 
                 if (help.saveScore(wordhunt, countdown, timeLeft)) {
                     backToMain.setText("Takaisin valikkoon");
-                    timeLeft.setText("game over- final score:" + wordhunt.getGame().getPoints());
+                    timeLeft.setText("Game Over\nPisteet:" + wordhunt.getGame().getPoints());
                 }
 
             });

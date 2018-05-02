@@ -22,8 +22,6 @@ public class Score {
     public Score(int points, User player, LocalDate date) {
         this.points = points;
         this.user = player;
-//        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMMdd");
-//        this.date = f.toString();
         this.date = date;
     }
 
@@ -31,30 +29,14 @@ public class Score {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-    
-
     public int getPoints() {
         return points;
     }
-//
-//    public void setScore(int points) {
-//        this.points = points;
-//    }
-//
-    public int getId() {
-        return id;
-    }
+
 
     public User getUser() {
         return user;
     }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
     
     
 }

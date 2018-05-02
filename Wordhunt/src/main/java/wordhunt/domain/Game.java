@@ -36,7 +36,6 @@ public class Game {
         this.gameOn = false;
     }
 
-
     public void setWordlist(String words) {
 
         try {
@@ -48,18 +47,18 @@ public class Game {
                 wordlist.add(line);
             }
             in.close();
-            
+
         } catch (Exception e) {
             System.out.println("Could not read file " + words + e);
             e.printStackTrace();
         }
     }
-    
+
     public void setWordlist(ArrayList<String> words) {
-        this.wordlist = wordlist;
+        this.wordlist = words;
     }
-    
-        public List<String> getCollectedWords() {
+
+    public List<String> getCollectedWords() {
         return collectedWords;
     }
 

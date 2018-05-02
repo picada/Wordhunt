@@ -44,13 +44,13 @@ public class UserDao implements Dao<User, Integer> {
             stmt.executeUpdate();
         }
 
-        return findByUsername(user.getName());
+        return findByUsername(user.getUsername());
     }
 
-    @Override
-    public void delete(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void delete(Integer key) throws SQLException {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public User findByUsername(String username) throws SQLException {
         try (Connection conn = database.getConnection()) {

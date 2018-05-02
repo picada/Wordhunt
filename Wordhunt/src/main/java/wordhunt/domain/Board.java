@@ -55,10 +55,6 @@ public class Board {
         return board;
     }
 
-    public void setBoard(Character[][] board) {
-        this.board = board;
-    }
-
     public int getCurrentx() {
         return currentx;
     }

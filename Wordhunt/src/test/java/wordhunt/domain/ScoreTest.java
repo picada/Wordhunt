@@ -27,8 +27,8 @@ public class ScoreTest {
     
     @Before
     public void setUp() {
-        one = new Score(1, 200, new User("username1", "test1"), LocalDate.now());
-        two = new Score(2, 100, new User("username2", "test2"), LocalDate.now());
+        one = new Score(200, new User("username1", "test1"), LocalDate.now());
+        two = new Score(100, new User("username2", "test2"), LocalDate.now());
     }
     
     @After

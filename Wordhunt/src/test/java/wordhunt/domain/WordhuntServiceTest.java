@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
  *
  * @author katamila
  */
-public class WordHuntTest {
+public class WordhuntServiceTest {
     
     private WordhuntService wordhunt;
     
-    public WordHuntTest() {
+    public WordhuntServiceTest() {
     }
     
     @BeforeClass
