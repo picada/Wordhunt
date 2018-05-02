@@ -63,9 +63,9 @@ public class GameTest {
     public void mixBoardReducesPoints() {
         game.setPoints(20);
         game.mixBoard();
-        assertEquals(10, game.getPoints());
+        assertEquals(30, game.getPoints());
         game.mixBoard();
-        assertEquals(0, game.getPoints());
+        assertEquals(20, game.getPoints());
     }
     
     @Test 
