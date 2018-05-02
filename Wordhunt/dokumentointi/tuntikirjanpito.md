@@ -13,4 +13,6 @@
 |21.4. | 2    | jar (ml. tarvittavien tiedostojen upottaminen jariin) + lisää testejä  |
 |23.4. | 3    | pelikierroksen keston säätely, tuloksen luominen ajan loppuessa (ei vielä tallennusta tietokantaan), sovelluslogiikan hiominen  |
 |24.4. | 2    | käyttöliittymän siistimistä, lisää testejä, sekvenssikaavio  |
-| yht   | 35    | 
+|2.5. | 4    | kluokkien eriyttämistä, pistetilastojen siirto sovellukseen, lisää testejä, javadoc |
+|3.5. | 1    | dokumentaatiota |
+| yht   | 40    | 
