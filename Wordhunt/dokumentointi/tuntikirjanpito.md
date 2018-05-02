@@ -12,7 +12,7 @@
 |20.4. | 4    | pelitoiminnallisuuksien kehittäminen, alustavien sääntöjen kirjoittaminen ja lisääminen sovellukseen, sovelluksen kielen vaihto suomeksi  |
 |21.4. | 2    | jar (ml. tarvittavien tiedostojen upottaminen jariin) + lisää testejä  |
 |23.4. | 3    | pelikierroksen keston säätely, tuloksen luominen ajan loppuessa (ei vielä tallennusta tietokantaan), sovelluslogiikan hiominen  |
-|24.4. | 2    | käyttöliittymän siistimistä, lisää testejä, sekvenssikaavio  |
-|2.5. | 4    | kluokkien eriyttämistä, pistetilastojen siirto sovellukseen, lisää testejä, javadoc |
+|24.4. | 2    | tulokset tietokantaan käyttöliittymän siistimistä, lisää testejä, sekvenssikaavio  |
+|2.5. | 4    | luokkien eriyttämistä, pistetilastojen siirto sovellukseen, lisää testejä, javadoc |
 |3.5. | 1    | dokumentaatiota |
 | yht   | 40    | 
