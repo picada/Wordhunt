@@ -13,6 +13,7 @@ import java.util.List;
 import wordhunt.domain.Score;
 import wordhunt.domain.User;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,11 +36,12 @@ public class ScoreDao implements Dao<Score, Integer> {
             stmt.setInt(1, key);
 
             ResultSet result = stmt.executeQuery();
+
             if (!result.next()) {
                 return null;
             }
 
-            return new Score(result.getInt("score"), userdao.findByUsername(result.getString("user")),  result.getDate("time").toLocalDate());
+            return new Score(result.getInt("score"), userdao.findByUsername(result.getString("user")), result.getDate("time").toLocalDate());
         }
     }
 
@@ -48,11 +50,57 @@ public class ScoreDao implements Dao<Score, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<Score> userTopTen(User user) throws SQLException {
+
+        ArrayList<Score> topTen = new ArrayList<Score>();
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT user, score, time FROM Score WHERE user = ? "
+                    + "ORDER BY score DESC "
+                    + "LIMIT 10");
+
+            stmt.setString(1, user.getUsername());
+
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+
+                topTen.add(new Score(result.getInt("score"),
+                        userdao.findByUsername(result.getString("user")), result.getDate("time").toLocalDate()));
+            }
+
+        }
+        return topTen;
+    }
+    
+    public List<Score> topTen() throws SQLException {
+
+        ArrayList<Score> topTen = new ArrayList<Score>();
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT user, score, time FROM Score "
+                    + "ORDER BY score DESC "
+                    + "LIMIT 10");
+
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+
+                topTen.add(new Score(result.getInt("score"),
+                        userdao.findByUsername(result.getString("user")), result.getDate("time").toLocalDate()));
+            }
+
+        }
+        return topTen;
+    }
+
     @Override
     public Score create(Score score) throws SQLException {
-        
+
         int scoreid;
-        
+
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Score (id, user, score, time) VALUES (?, ?, ?, ?)");
             stmt.setString(2, score.getUser().getUsername());

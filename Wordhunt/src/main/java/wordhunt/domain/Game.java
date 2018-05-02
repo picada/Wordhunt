@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -22,26 +21,21 @@ public class Game {
     private int time;
     private List<String> wordlist;
     private List<String> collectedWords;
-    private Character[][] board;
+    private Board board;
     private List<String> currentword;
-    private int currentx;
-    private int currenty;
     private boolean gameOn;
 
-    public Game(int width, int height, String wordlist) {
-        board = new Character[width][height];
+    public Game(Board board, String wordlist) {
+        this.board = board;
+        this.board.setBoard();
         this.wordlist = new ArrayList<String>();
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
         this.time = 120;
-        setBoard();
         this.gameOn = false;
     }
 
-    public List<String> getCollectedWords() {
-        return collectedWords;
-    }
 
     public void setWordlist(String words) {
 
@@ -54,28 +48,23 @@ public class Game {
                 wordlist.add(line);
             }
             in.close();
+            
         } catch (Exception e) {
             System.out.println("Could not read file " + words + e);
             e.printStackTrace();
         }
     }
-
-    public void setBoard() {
-        String chars = "aaaabcdeeeeefghhhiiiijjjjkkkkllllmmmmnnnoooopppqrrrsssstttyyuuuvxyzåääöö";
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board[x].length; y++) {
-                board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
-            }
-        }
+    
+    public void setWordlist(ArrayList<String> words) {
+        this.wordlist = wordlist;
     }
-
-    public void newRandomLetter(int x, int y) {
-        String chars = "aaaabcdeeeeefghhhiiiijjjjkkkkllllmmmmnnnoooopppqrrrsssstttyyuuuvxyzåääöö";
-        board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
+    
+        public List<String> getCollectedWords() {
+        return collectedWords;
     }
 
     public void mixBoard() {
-        setBoard();
+        board.setBoard();
         if (points <= 10) {
             points = 0;
         } else {
@@ -83,41 +72,8 @@ public class Game {
         }
     }
 
-    public Character[][] getBoard() {
+    public Board getBoard() {
         return board;
-    }
-
-    public int getCurrentx() {
-        return currentx;
-    }
-
-    public void setCurrentx(int currentx) {
-        this.currentx = currentx;
-    }
-
-    public int getCurrenty() {
-        return currenty;
-    }
-
-    public void setCurrenty(int currenty) {
-        this.currenty = currenty;
-    }
-
-    public boolean isNextTo(int x, int y) {
-        for (int i = y - 1; i < y + 2; i++) {
-            if (i < 0 || i >= board.length) {
-                continue;
-            }
-            for (int j = x - 1; j < x + 2; j++) {
-                if (j < 0 || j >= board[i].length || (x == j && y == i)) {
-                    continue;
-                }
-                if (j == currentx && i == currenty) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     public void collectLetter(String s) {
@@ -181,10 +137,6 @@ public class Game {
 
     public List<String> getWordlist() {
         return wordlist;
-    }
-
-    public void setWordlist(List<String> wordlist) {
-        this.wordlist = wordlist;
     }
 
     public void startGame() {

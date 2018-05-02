@@ -24,7 +24,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import wordhunt.domain.Game;
-import wordhunt.domain.Wordhunt;
+import wordhunt.domain.WordhuntService;
+import wordhunt.domain.Board;
 
 /**
  *
@@ -43,7 +44,7 @@ public class UiHelp {
     public void updatePuzzle(Game game, GridPane grid, Label word, Label valid) {
         grid.getChildren().clear();
 
-        Character[][] letters = game.getBoard();
+        Character[][] letters = game.getBoard().getBoard();
 
         for (int x = 0; x < letters.length; x++) {
             for (int y = 0; y < letters[x].length; y++) {
@@ -61,20 +62,20 @@ public class UiHelp {
     
     public void letterClickAction(Game game, Button letter, Label word, Label valid) {
         if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
-                            || !game.gameOver() && game.isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
+                            || !game.gameOver() && game.getBoard().isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
                         game.collectLetter(letter.getText().toLowerCase());
                         word.setText(game.buildString(game.getCurrentword()));
-                        game.setCurrentx(GridPane.getColumnIndex(letter));
-                        game.setCurrenty(GridPane.getRowIndex(letter));
+                        game.getBoard().setCurrentx(GridPane.getColumnIndex(letter));
+                        game.getBoard().setCurrenty(GridPane.getRowIndex(letter));
                         letter.setStyle("-fx-background-color:yellow;");
                         clicked.add(letter);
                     }
                     valid.setText("");
     }
 
-    public void startOrShuffleAction(Wordhunt wordhunt, Label points) {
+    public void startOrShuffleAction(WordhuntService wordhunt, Label points) {
         if (!wordhunt.getGame().getGameOn()) {
-            wordhunt.getGame().setBoard();
+            wordhunt.getGame().getBoard().setBoard();
             wordhunt.getGame().startGame();
         } else {
             wordhunt.getGame().mixBoard();
@@ -100,7 +101,7 @@ public class UiHelp {
         return countdown;
     }
 
-    public boolean saveScore(Wordhunt wordhunt, Timeline countdown, Label timeLeft) {
+    public boolean saveScore(WordhuntService wordhunt, Timeline countdown, Label timeLeft) {
         if (wordhunt.getGame().gameOver()) {
             try {
                 wordhunt.createScore(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser(), LocalDate.now());
@@ -131,7 +132,7 @@ public class UiHelp {
     public void insertNewLetters(GridPane grid, Game game) {
 
         grid.getChildren().stream().filter(n -> clicked.contains(n))
-                .forEach(n -> game.newRandomLetter(GridPane.getColumnIndex(n),
+                .forEach(n -> game.getBoard().newRandomLetter(GridPane.getColumnIndex(n),
                 GridPane.getRowIndex(n))
                 );
     }

@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class WordHuntTest {
     
-    private Wordhunt wordhunt;
+    private WordhuntService wordhunt;
     
     public WordHuntTest() {
     }

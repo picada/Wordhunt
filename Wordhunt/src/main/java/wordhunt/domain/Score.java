@@ -7,6 +7,7 @@ package wordhunt.domain;
 
 import java.time.LocalDate;
 
+
 /**
  *
  * @author katamila

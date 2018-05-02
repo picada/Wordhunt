@@ -33,7 +33,7 @@ import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
 import wordhunt.domain.Game;
 import wordhunt.domain.Score;
-import wordhunt.domain.Wordhunt;
+import wordhunt.domain.WordhuntService;
 
 /**
  *
@@ -41,16 +41,19 @@ import wordhunt.domain.Wordhunt;
  */
 public class WordhuntUi extends Application {
 
-    private Wordhunt wordhunt;
+    private WordhuntService wordhunt;
 
     private Scene mainScene;
     private Scene newUserScene;
     private Scene loginScene;
     private Scene puzzleScene;
     private Scene ruleScene;
+    private Scene scoreScene;
 
     private Label menuLabel = new Label();
     private Label timeLeft = new Label();
+    private Label userTopTen = new Label();
+    private Label topTen = new Label();
 
     private Timeline countdown;
 
@@ -64,12 +67,12 @@ public class WordhuntUi extends Application {
         ScoreDao scores = new ScoreDao(database);
 
         // alustetaan sovelluslogiikka 
-        wordhunt = new Wordhunt(users, scores);
+        wordhunt = new WordhuntService(users, scores);
         help = new UiHelp();
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         // login scene
 
         VBox loginPane = new VBox(10);
@@ -183,6 +186,9 @@ public class WordhuntUi extends Application {
 
         Button ruleView = new Button("Säännöt");
         ruleView.setPadding(new Insets(10));
+        
+        Button highscoreView = new Button("Huipputulokset");
+        highscoreView.setPadding(new Insets(10));
 
         puzzleView.setOnAction(e -> {
 
@@ -197,6 +203,22 @@ public class WordhuntUi extends Application {
             primaryStage.setScene(ruleScene);
 
         });
+        
+        highscoreView.setOnAction(e -> {
+
+            primaryStage.setScene(scoreScene);
+            try {
+                userTopTen.setText(wordhunt.printUserTopTen());
+            } catch (Exception ex) {
+                Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                topTen.setText(wordhunt.printTopTen());
+            } catch (Exception ex) {
+                Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
 
         Button logoutButton = new Button("Kirjaudu ulos");
         logoutButton.setPadding(new Insets(10));
@@ -206,7 +228,7 @@ public class WordhuntUi extends Application {
             primaryStage.setScene(loginScene);
         });
 
-        mainPane.getChildren().addAll(menuLabel, puzzleView, ruleView, logoutButton);
+        mainPane.getChildren().addAll(menuLabel, puzzleView, ruleView, highscoreView, logoutButton);
 
         mainPane.setAlignment(Pos.CENTER);
         mainScene = new Scene(mainPane, 800, 700);
@@ -232,6 +254,36 @@ public class WordhuntUi extends Application {
         rulePane.setAlignment(Pos.CENTER);
         rules.setTextAlignment(TextAlignment.CENTER);
         ruleScene = new Scene(rulePane, 800, 700);
+        
+        // highscore scene
+        
+        BorderPane scorePane = new BorderPane();
+        scorePane.setPadding(new Insets(10));
+        
+        VBox personalHighscores = new VBox(10);
+        personalHighscores.setPadding(new Insets(10));
+        Label personalHighscoreLabel = new Label("Omat parhaat tulokset");
+        personalHighscoreLabel.setPadding(new Insets(10));
+        personalHighscores.setMinWidth(400);
+        
+        personalHighscores.getChildren().addAll(personalHighscoreLabel, userTopTen);
+        
+        VBox allHighscores = new VBox(10);
+        allHighscores.setPadding(new Insets(10));
+        Label allHighscoresLabel = new Label("Kaikkien pelaajien parhaat tulokset");
+        allHighscoresLabel.setPadding(new Insets(10));
+        allHighscores.setMinWidth(400);
+        
+        allHighscores.getChildren().addAll(allHighscoresLabel, topTen);
+
+        personalHighscores.setAlignment(Pos.CENTER);
+        allHighscores.setAlignment(Pos.CENTER);
+        scorePane.setBottom(back);
+        scorePane.setLeft(personalHighscores);
+        scorePane.setRight(allHighscores);
+
+        scoreScene = new Scene(scorePane, 800, 700);
+
 
         // (test) puzzle scene
         BorderPane puzzlePane = new BorderPane();

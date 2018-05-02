@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.List;
 import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
 
@@ -16,14 +17,14 @@ import wordhunt.database.UserDao;
  *
  * @author katamila
  */
-public class Wordhunt {
+public class WordhuntService {
 
     private UserDao users;
     private ScoreDao scores;
     private User user;
     private Game game;
 
-    public Wordhunt(UserDao userDao, ScoreDao scoreDao) {
+    public WordhuntService(UserDao userDao, ScoreDao scoreDao) {
         this.users = userDao;
         this.scores = scoreDao;
     }
@@ -33,7 +34,7 @@ public class Wordhunt {
     }
 
     public void setGame(int width, int height, String wordlist) {
-        this.game = new Game(width, height, wordlist);
+        this.game = new Game(new Board(width, height), wordlist);
     }
 
     public boolean login(String username) throws Exception {
@@ -83,7 +84,7 @@ public class Wordhunt {
         }
         return s.toString();
     }
-    
+
     public boolean createScore(int points, User user, LocalDate date) throws Exception {
         if (!this.getGame().gameOver()) {
             return false;
@@ -92,6 +93,30 @@ public class Wordhunt {
         scores.create(score);
 
         return true;
+    }
+
+    public String printUserTopTen() throws Exception {
+        List<Score> topTen = scores.userTopTen(this.getLoggedUser());
+        StringBuilder s = new StringBuilder();
+        s.append("Sija\t" + "Pisteet\t" + "Pvm\n");
+        for (int i = 0; i < topTen.size(); i++) {
+            int place = i + 1;
+            s.append((i + 1) + ".\t" + topTen.get(i).getPoints()
+                    + "\t\t" + topTen.get(i).getDate() + "\n");
+        }
+        return s.toString();
+    }
+
+    public String printTopTen() throws Exception {
+        List<Score> topTen = scores.topTen();
+        StringBuilder s = new StringBuilder();
+        s.append("Sija\t" + "Käyttäjä\t" + "Pisteet\t" + "Pvm\n");
+        for (int i = 0; i < topTen.size(); i++) {
+            int place = i + 1;
+            s.append((i + 1) + ".\t" + topTen.get(i).getUser().getUsername() + "\t\t"
+                    + topTen.get(i).getPoints() + "\t\t" + topTen.get(i).getDate() + "\n");
+        }
+        return s.toString();
     }
 
 }
