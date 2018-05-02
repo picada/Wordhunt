@@ -23,6 +23,7 @@ public class UserDao implements Dao<User, Integer> {
     public UserDao(Database db) {
         database = db;
     }
+    
 
     @Override
     public User findOne(Integer key) throws SQLException {
@@ -34,6 +35,16 @@ public class UserDao implements Dao<User, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * Saves a new user to the database
+     * 
+     * @param user the new user to be saved
+     * 
+     * @return a new User fetched from the database
+     * 
+     */
+    
     @Override
     public User create(User user) throws SQLException {
 
@@ -52,6 +63,16 @@ public class UserDao implements Dao<User, Integer> {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
 
+    /**
+     *
+     * Finds a user from the database based on the username
+     * 
+     * @param username the given username
+     * 
+     * @return a new User fetched from the database based on the username
+     * 
+     */
+    
     public User findByUsername(String username) throws SQLException {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("SELECT username, name FROM User WHERE username = ?");

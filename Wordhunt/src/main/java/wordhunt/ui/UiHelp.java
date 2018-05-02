@@ -64,7 +64,7 @@ public class UiHelp {
         if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
                             || !game.gameOver() && game.getBoard().isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
                         game.collectLetter(letter.getText().toLowerCase());
-                        word.setText(game.buildString(game.getCurrentword()));
+                        word.setText(game.buildString());
                         game.getBoard().setCurrentx(GridPane.getColumnIndex(letter));
                         game.getBoard().setCurrenty(GridPane.getRowIndex(letter));
                         letter.setStyle("-fx-background-color:yellow;");

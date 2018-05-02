@@ -136,16 +136,16 @@ public class GameTest {
     }
     
     @Test 
-    public void buildStringReturnsCollectStringFromList() {
+    public void buildStringReturnsCorrectStringFromList() {
         game.getCurrentword().add("c");
         game.getCurrentword().add("a");
         game.getCurrentword().add("t");
-        assertEquals("cat", game.buildString(game.getCurrentword()));
+        assertEquals("cat", game.buildString());
         game.getCurrentword().clear();
         game.getCurrentword().add("d");
         game.getCurrentword().add("o");
         game.getCurrentword().add("g");
-        assertEquals("dog", game.buildString(game.getCurrentword()));
+        assertEquals("dog", game.buildString());
     } 
     
     @Test
