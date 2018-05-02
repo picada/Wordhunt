@@ -275,10 +275,19 @@ public class WordhuntUi extends Application {
         allHighscores.setMinWidth(400);
         
         allHighscores.getChildren().addAll(allHighscoresLabel, topTen);
+        
+        Button backFromScores = new Button("Takaisin päävalikkoon");
+        backFromScores.setPadding(new Insets(10));
+        
+        backFromScores.setOnAction(e -> {
+
+            primaryStage.setScene(mainScene);
+
+        });
 
         personalHighscores.setAlignment(Pos.CENTER);
         allHighscores.setAlignment(Pos.CENTER);
-        scorePane.setBottom(back);
+        scorePane.setBottom(backFromScores);
         scorePane.setLeft(personalHighscores);
         scorePane.setRight(allHighscores);
 

@@ -12,6 +12,7 @@ import java.time.LocalDate;
  *
  * @author katamila
  */
+
 public class Score {
     
     private int id;
@@ -24,16 +25,39 @@ public class Score {
         this.user = player;
         this.date = date;
     }
+    
+    /**
+     *
+     * Getter for the score's date
+     * 
+     * @return the date when the score was submitted
+     * 
+     */
 
     public LocalDate getDate() {
         return date;
     }
+    
+    /**
+     *
+     * Getter for the score's points
+     * 
+     * @return the saved score
+     * 
+     */
 
     public int getPoints() {
         return points;
     }
 
-
+    /**
+     *
+     * Getter for the User who owns the score
+     * 
+     * @return the User that owns the score
+     * 
+     */
+    
     public User getUser() {
         return user;
     }
