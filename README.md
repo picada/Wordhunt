@@ -10,9 +10,12 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus
 
 [Arkkitehtuurikuvaus](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
 
+[Alustava käyttöohje](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/kayttoohje.md)
+
 ## Releaset
 
-[Viikko 5](https://github.com/picada/otm-harjoitustyo/releases)
+[Viikko 5](https://github.com/picada/otm-harjoitustyo/releases/tag/viikko5)
+[Viikko 6](https://github.com/picada/otm-harjoitustyo/releases/tag/viikko6
 
 ## Komentorivitoiminnot
 
