@@ -53,4 +53,12 @@ mvn package
 
 generoi hakemistoon _target_ suoritettavan jar-tiedoston _wordhunt-1.0-SNAPSHOT.jar_
 
-Sisältöä päivitetään kurssin edetessä.
+### JavaDoc
+
+JavaDoc generoidaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella avaamalla selaimella tiedosto target/site/apidocs/index.html
