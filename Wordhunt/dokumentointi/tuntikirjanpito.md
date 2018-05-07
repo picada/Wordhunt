@@ -15,4 +15,5 @@
 |24.4. | 2    | tulokset tietokantaan käyttöliittymän siistimistä, lisää testejä, sekvenssikaavio  |
 |2.5. | 4    | luokkien eriyttämistä, pistetilastojen siirto sovellukseen, lisää testejä, javadoc |
 |3.5. | 1    | dokumentaatiota |
-| yht   | 40    | 
+|8.5. | 1    | dokumentaatiota (arkkitehtuurikuvauksen ja käyttöohjeen päivitystä) |
+| yht   | 41    | 
