@@ -63,6 +63,8 @@ KUVA?
 
 Käyttäjä voi koska tahansa tyhjentää valintansa painamalla "Tyhjennä valinnat".
 
+Käyttäjä voi missä tahansa vaiheessa peliä sekoittaa pelilaudan, mutta tämä vaikuttaa negatiivisesti pistesaldoon. Pistesaldo ei voi kuitenkaan mennä miinukselle.
+
 Kun pelikellon aika loppuu, tallentuvat pelin pisteet automaattisesti tietokantaan eikä käyttäjä pysty enää valitsemaan uusia sanoja. Pelaaja voi aloittaa uuden pelin päävalikon kautta. 
 
 Mikäli käyttäjä poistuu pelistä kesken pelin, tulokset eivät tallennu tietokantaan ja peli nollautuu. 
