@@ -32,7 +32,7 @@ public class Game {
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
-        this.time = 20;
+        this.time = 120;
         this.gameOn = false;
     }
 
@@ -198,15 +198,17 @@ public class Game {
 
     /**
      *
-     * Takes the given word length and adds points with the given formula (at
-     * this point multiplication by two)
+     * Takes the given word length and adds points with the given formula (higher wordlength 
+     * increases the multiplier)
      *
      * @param wordLength length of the submitted word as int
      *
      */
     public void setPoints(int wordLength) {
-        double multiplier = 50;
-        if (wordLength == 5) {
+        double multiplier = 30;
+        if (wordLength == 4) {
+            multiplier = 50;
+        } else if (wordLength == 5) {
             multiplier = 75;
         } else if (wordLength >= 6) {
             multiplier = 100;

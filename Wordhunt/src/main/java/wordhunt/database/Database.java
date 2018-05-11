@@ -19,10 +19,26 @@ public class Database {
     public Database(String databaseAddress) throws ClassNotFoundException {
         this.databaseAddress = databaseAddress;
     }
+    
+    /**
+     *
+     * Creates a connection to this.databasAddress
+     *
+     * @return connection to database
+     * 
+     */
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(databaseAddress);
     }
+    
+     /**
+     *
+     * Init method for the database, performs given commands (in this case creates
+     * necessary tables if they don't exist)
+     *
+     * 
+     */
 
     public void init() {
         List<String> commands = sqliteCommands();
@@ -40,12 +56,20 @@ public class Database {
             System.out.println("Error >> " + t.getMessage());
         }
     }
+    
+     /**
+     *
+     * Creates a list of sqlite commands
+     *
+     * @return list of sqlite commands, in this case CREATE TABLE commands
+     * 
+     */
 
     private List<String> sqliteCommands() {
         ArrayList<String> commands = new ArrayList<>();
 
-        commands.add("CREATE TABLE IF NOT EXISTS User (username varchar(10) PRIMARY KEY, name varchar(50))");
-        commands.add("CREATE TABLE IF NOT EXISTS Score (id integer PRIMARY KEY, user varchar(10), score integer, time date, FOREIGN KEY (user) REFERENCES User(username))");
+        commands.add("CREATE TABLE IF NOT EXISTS User (username varchar(8) PRIMARY KEY, name varchar(50))");
+        commands.add("CREATE TABLE IF NOT EXISTS Score (id integer PRIMARY KEY, user varchar(8), score integer, time date, FOREIGN KEY (user) REFERENCES User(username))");
 
         return commands;
     }

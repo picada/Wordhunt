@@ -140,7 +140,7 @@ public class WordhuntUi extends Application {
             if (username.length() < 4 || name.length() < 2) {
                 userCreationMessage.setText("Käyttäjätunnus tai nimi liian lyhyt");
                 userCreationMessage.setTextFill(Color.RED);
-            } else if (username.length() > 10 || name.length() > 50) {
+            } else if (username.length() > 8 || name.length() > 50) {
                 userCreationMessage.setText("Käyttäjätunnus tai nimi liian pitkä");
                 userCreationMessage.setTextFill(Color.RED);
             } else {
@@ -396,7 +396,9 @@ public class WordhuntUi extends Application {
         clearWord.setOnAction(e -> {
 
             wordhunt.getGame().getCurrentword().clear();
-            help.updatePuzzle(wordhunt.getGame(), puzzle, word, valid);
+            if (wordhunt.getGame().getGameOn()) {
+                help.updatePuzzle(wordhunt.getGame(), puzzle, word, valid);
+            }
             word.setText("");
         });
 
