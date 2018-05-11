@@ -20,6 +20,8 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettu sovellus. 
 
 [Viikko 6](https://github.com/picada/otm-harjoitustyo/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/picada/otm-harjoitustyo/releases/tag/loppupalautus)
+
 ## Komentorivitoiminnot
 
 ### Testaus
