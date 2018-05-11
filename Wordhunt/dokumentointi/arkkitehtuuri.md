@@ -39,18 +39,25 @@ Toiminnallisista kokonaisuuksista vastaa luokka WordhuntService ja siitä käytt
 
 ## Tiedon pysyväistallennus
 
-Pakkauksen wordhunt.database rajapintaa Dao ilmentävät luokat UserDao ja ScoreDao vastaavat tiedon tallennuksesta SQL-tietokantaan, joka luodaan luokan Database avulla.
+Pakkauksen wordhunt.database rajapintaa Dao ilmentävät luokat UserDao ja ScoreDao vastaavat tiedon tallennuksesta SQL-tietokantaan, joka luodaan luokan Database avulla. 
 
-## Päätoiminnallisuudet
+## Toiminnallisuudet
 
 Seuraavassa on kuvattu sovelluksen toimintalogiikkaa joidenkin päätoiminnallisuuksien osalta sekvenssikaavioina.
 
-### Sovelluksen toiminta käyttäjän syöttäessä pelin aikana uuden, hyväksytyn sanan (päivitettävä)
+### Käyttäjän kirjautuminen
 
-<img src="https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/index.php.png">
+Kun kirjautumisnäkymässä on syötekenttään kirjoitettu käyttäjätunnus ja klikataan painiketta "Kirjaudu sisään" etenee sovelluksen kontrolli seuraavasti (sekvenssikaaviossa ei ole kuvattu yhteyttä tietokantaan):
 
-pisteiden tallennus tietokantaan
+<img src="https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/login.png">
 
-käyttäjän kirjautuminen?
+Painikkeen painamiseen reagoiva tapahtumankäsittelijä kutsuu sovelluslogiikan wordhuntService metodia login antaen parametriksi kirjautuneen käyttäjätunnuksen. Sovelluslogiikka selvittää userDao:n avulla onko käyttäjätunnus olemassa. Jos on, eli kirjautuminen onnistuu, on seurauksena se että käyttöliittymä vaihtaa näkymäksi mainScenen, eli sovelluksen varsinaisen päänäkymän.
 
-## Ohjelman rakenteeseen jääneet heikkoudet
+### Sovelluksen toiminta käyttäjän syöttäessä pelin aikana uuden, hyväksytyn sanan 
+
+Kun käyttäjä klikkaa pelinäkymässä pelin ollessa käynnissä painiketta "Syötä sana" etenee sovelluksen kontrolli seuraavasti:
+
+<img src="https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/sendWord2.png">
+
+Tapahtumakäsittelijä kutsuu käyttöliittymän apuluokan UiHelp metodia acceptedWord, joka saa parametrikseen tämän hetkisen pelin, pelissä tällä hetkellä kerättynä olevan sanan sekä käyttöliittymän Labelit valid ja points. acceptedWord puolestaan tarkistaa löytyykö syötetty sana käynnissä olevan pelin sanalistasta ... 
+
