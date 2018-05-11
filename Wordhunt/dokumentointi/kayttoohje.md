@@ -2,7 +2,7 @@
 
 Lataa tiedosto [wordhunt.jar](https://github.com/picada/otm-harjoitustyo/releases/tag/loppupalautus)
 
-## Ohjelman käynnistäminen 
+## Konfigurointi
 
 Ohjelman olettaa, että käyttäjän tietokoneelle on asennettu SQLite. Muuta konfiguraatiota ei tarvita, pelin hyödyntämä sanalisa sekä säännöt on upotettu mukaan jar-tiedostoon. Sovellus luo käyttämänsä tietokannan tarvittaessa käynnistäessä.
 
