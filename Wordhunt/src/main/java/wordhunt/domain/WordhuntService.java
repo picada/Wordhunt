@@ -8,6 +8,7 @@ package wordhunt.domain;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -191,11 +192,10 @@ public class WordhuntService {
     public String printUserTopTen() throws Exception {
         ArrayList<Score> topTen = scores.userTopTen(this.getLoggedUser());
         StringBuilder s = new StringBuilder();
-        s.append("Sija\t" + "Pisteet\t\t" + "Pvm\n");
         for (int i = 0; i < topTen.size(); i++) {
             int place = i + 1;
-            s.append((i + 1) + ".\t" + topTen.get(i).getPoints()
-                    + "\t\t" + topTen.get(i).getDate() + "\n");
+            s.append(place + ".\t Pisteet: "
+                    + topTen.get(i).getPoints() + "/ päivämäärä: " + topTen.get(i).getDate() + "\n");
         }
         return s.toString();
     }
@@ -214,13 +214,13 @@ public class WordhuntService {
     public String printTopTen() throws Exception {
         ArrayList<Score> topTen = scores.topTen();
         StringBuilder s = new StringBuilder();
-        s.append("Sija\t" + "Käyttäjä\t" + "Pisteet\t" + "Pvm\n");
         for (int i = 0; i < topTen.size(); i++) {
             int place = i + 1;
-            s.append(place + ".\t" + topTen.get(i).getUser().getUsername() + "\t"
-                    + topTen.get(i).getPoints() + "\t" + topTen.get(i).getDate() + "\n");
+            s.append(place + ".\t" + topTen.get(i).getUser().getUsername() + " / pisteet: "
+                    + topTen.get(i).getPoints() + " / päivämäärä: " + topTen.get(i).getDate() + "\n");
         }
         return s.toString();
     }
+    
 
 }

@@ -16,9 +16,12 @@ public class Board {
     private Character[][] board;
     private int currentx;
     private int currenty;
+    private String chars;
 
     public Board(int width, int height) {
         board = new Character[width][height];
+        chars = "aaaaaabcdeeeeeeefghhhhiieeiijjjjkkkkllllmmmmnnnnnnooooopppppqrrrrrssssstttttyyyuuuuuvxyzåäääöö";
+
     }
     
     /**
@@ -29,7 +32,6 @@ public class Board {
      */
 
     public void setBoard() {
-        String chars = "aaaaabcdeeeeeefghhhhiiiijjjjkkkkllllmmmmnnnnnoooopppppqrrrrrssssstttttyyyuuuuuvxyzåääöö";
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
                 board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
@@ -47,7 +49,6 @@ public class Board {
 
 
     public void newRandomLetter(int x, int y) {
-        String chars = "aaaaabcdeeeeeefghhhhiiiijjjjkkkkllllmmmmnnnnnoooopppppqrrrrrssssstttttyyyuuuuuvxyzåääöö";
         board[x][y] = chars.charAt(new Random().nextInt(chars.length()));
     }
     

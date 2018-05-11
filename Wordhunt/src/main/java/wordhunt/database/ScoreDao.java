@@ -28,6 +28,16 @@ public class ScoreDao implements Dao<Score, Integer> {
         database = db;
         this.userdao = new UserDao(db);
     }
+    
+     /**
+     *
+     * Searches for a specific score from the database by the given key/id
+     *
+     * @param key the score's primary key
+     * 
+     * @return a new Score object fetched from the database based on the key
+     * 
+     */
 
     @Override
     public Score findOne(Integer key) throws SQLException {
@@ -45,10 +55,21 @@ public class ScoreDao implements Dao<Score, Integer> {
         }
     }
 
+    
     @Override
     public List<Score> findAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    /**
+     *
+     * Finds and lists the top scores (max 10) for the given user
+     *
+     * @param user The user who is logged in
+     * 
+     * @return list of the top scores (max 10)
+     * 
+     */
 
     public ArrayList<Score> userTopTen(User user) throws SQLException {
 
@@ -74,6 +95,15 @@ public class ScoreDao implements Dao<Score, Integer> {
         return topTen;
     }
     
+    /**
+     *
+     * Finds and lists the top scores (max 10) from all users
+     *
+     * 
+     * @return list of the top scores among all users (max 10)
+     * 
+     */
+    
     public ArrayList<Score> topTen() throws SQLException {
 
         ArrayList<Score> topTen = new ArrayList<Score>();
@@ -95,6 +125,16 @@ public class ScoreDao implements Dao<Score, Integer> {
         }
         return topTen;
     }
+    
+    /**
+     *
+     * Saves a new score to the database
+     *
+     * @param score The score that is created when the game ends
+     * 
+     * @return a new Score fetched from the database
+     * 
+     */
 
     @Override
     public Score create(Score score) throws SQLException {

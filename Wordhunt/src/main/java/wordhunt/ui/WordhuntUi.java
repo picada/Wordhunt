@@ -266,7 +266,8 @@ public class WordhuntUi extends Application {
         personalHighscores.setPadding(new Insets(10));
         Label personalHighscoreLabel = new Label("Omat parhaat tulokset");
         personalHighscoreLabel.setPadding(new Insets(10));
-        personalHighscores.setMinWidth(400);
+        personalHighscoreLabel.setStyle("-fx-font-weight: bold;");
+        personalHighscores.setMaxWidth(300);
 
         personalHighscores.getChildren().addAll(personalHighscoreLabel, userTopTen);
 
@@ -274,6 +275,7 @@ public class WordhuntUi extends Application {
         allHighscores.setPadding(new Insets(10));
         Label allHighscoresLabel = new Label("Kaikkien pelaajien parhaat tulokset");
         allHighscoresLabel.setPadding(new Insets(10));
+        allHighscoresLabel.setStyle("-fx-font-weight: bold;");
         allHighscores.setMinWidth(400);
 
         allHighscores.getChildren().addAll(allHighscoresLabel, topTen);

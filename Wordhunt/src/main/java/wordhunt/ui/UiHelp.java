@@ -5,6 +5,7 @@
  */
 package wordhunt.ui;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import wordhunt.database.ScoreDao;
 import wordhunt.domain.Game;
 import wordhunt.domain.WordhuntService;
 import wordhunt.domain.Board;
+import wordhunt.domain.Score;
 
 /**
  *
@@ -40,20 +43,19 @@ public class UiHelp {
     public UiHelp() {
         this.clicked = new ArrayList<>();
     }
-    
+
     /**
      *
-     * Updates the current puzzle view 
-     * 
+     * Updates the current puzzle view
+     *
      * @param game the current game
      * @param grid the current grid
      * @param word the current word
      * @param valid the label which shows if the word is valid
-     * 
+     *
      * @return current game
-     * 
+     *
      */
-
     public void updatePuzzle(Game game, GridPane grid, Label word, Label valid) {
         grid.getChildren().clear();
 
@@ -72,47 +74,45 @@ public class UiHelp {
             }
         }
     }
-    
+
     /**
      *
-     * Defines the mouse event for clicking a letter: if the letter is a neighbour
-     * to the last clicked letter button on the board, the letter is added to the word
-     * Also updates necessary labels
-     * 
+     * Defines the mouse event for clicking a letter: if the letter is a
+     * neighbour to the last clicked letter button on the board, the letter is
+     * added to the word Also updates necessary labels
+     *
      * @param game the current game
      * @param letter the button that the user clicks
      * @param word the current word
      * @param valid the label which shows if the word is valid
-     * 
-     * 
+     *
+     *
      */
-    
     public void letterClickAction(Game game, Button letter, Label word, Label valid) {
         if (!game.gameOver() && game.getCurrentword().isEmpty() && !clicked.contains(letter)
-                            || !game.gameOver() && game.getBoard().isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
-                        game.collectLetter(letter.getText().toLowerCase());
-                        word.setText(game.buildString());
-                        game.getBoard().setCurrentx(GridPane.getColumnIndex(letter));
-                        game.getBoard().setCurrenty(GridPane.getRowIndex(letter));
-                        letter.setStyle("-fx-background-color:yellow;");
-                        clicked.add(letter);
-                    }
-                    valid.setText("");
+                || !game.gameOver() && game.getBoard().isNextTo(GridPane.getColumnIndex(letter), GridPane.getRowIndex(letter))) {
+            game.collectLetter(letter.getText().toLowerCase());
+            word.setText(game.buildString());
+            game.getBoard().setCurrentx(GridPane.getColumnIndex(letter));
+            game.getBoard().setCurrenty(GridPane.getRowIndex(letter));
+            letter.setStyle("-fx-background-color:yellow;");
+            clicked.add(letter);
+        }
+        valid.setText("");
     }
 
     /**
      *
-     * Defines the mouse event for the start/shuffle button in the puzzle view: 
+     * Defines the mouse event for the start/shuffle button in the puzzle view:
      * if the game hasn't started the method sets the board and starts the game,
-     * otherwise the click shuffles the board and reduces points
-     * Also updates necessary labels
-     * 
+     * otherwise the click shuffles the board and reduces points Also updates
+     * necessary labels
+     *
      * @param game the current game
      * @param points the label showing the current points
-     * 
-     * 
+     *
+     *
      */
-    
     public void startOrShuffleAction(Game game, Label points) {
         if (!game.getGameOn()) {
             game.getBoard().setBoard();
@@ -123,19 +123,19 @@ public class UiHelp {
             game.getCurrentword().clear();
         }
     }
-    
+
     /**
      *
-     * Starts the countdown TimeLine if game is not already on or over and updates necessary labels
-     * 
+     * Starts the countdown TimeLine if game is not already on or over and
+     * updates necessary labels
+     *
      * @param timeline the timeline created in the UI
      * @param game the current game
      * @param timeLeft the label showing the time left in the game
-     * 
-     * @return a "ticking" TimeLine  
-     * 
+     *
+     * @return a "ticking" TimeLine
+     *
      */
-
     public Timeline startCountdownIfGameNotOn(Timeline countdown, Game game, Label timeLeft) {
         if (!game.getGameOn() && !game.gameOver()) {
 
@@ -152,21 +152,20 @@ public class UiHelp {
         }
         return countdown;
     }
-    
+
     /**
      *
      * Saves the user's score to when the game ends and updates necessary labels
-     * 
+     *
      * @param wordhunt the current WordhuntService
      * @param backToMain the button that takes the user back to the main view
      * @param timeLeft the label showing the time left in the game
-     * 
+     *
      */
-
     public void saveScore(WordhuntService wordhunt, Button backToMain, Label timeLeft) {
         try {
             if (wordhunt.createScore()) {
-            timeLeft.setText("Game Over\nPisteet:" + wordhunt.getGame().getPoints());
+                timeLeft.setText("Game Over\nPisteet:" + wordhunt.getGame().getPoints());
             } else {
                 timeLeft.setText("Pisteiden tallennus epäonnistui");
             }
@@ -175,21 +174,20 @@ public class UiHelp {
             Logger.getLogger(UiHelp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      *
-     * Checks if the submitted word is valid (=not yet submitted and can be found from the wordlist),
-     * updates necessary labels
-     * 
+     * Checks if the submitted word is valid (=not yet submitted and can be
+     * found from the wordlist), updates necessary labels
+     *
      * @param game the current game
      * @param word the label showing the current word
      * @param valid the label showing if the submitted word is valid
      * @param points the label showing the current points
-     * 
+     *
      * @return true if word is valid and accepted, otherwise false
-     * 
+     *
      */
-
     public boolean acceptedWord(Game game, Label word, Label valid, Label points) {
         if (!game.isNewWord(word.getText())) {
             valid.setText("Sana on jo syötetty");
@@ -205,17 +203,16 @@ public class UiHelp {
         }
         return false;
     }
-    
+
     /**
      *
-     * Inserts new random letters to the puzzle gridPane to the children which 
+     * Inserts new random letters to the puzzle gridPane to the children which
      * have been "used" in an accepted word
-     * 
+     *
      * @param grid the gridPane that represents the board
      * @param board the board in the current game
-     * 
+     *
      */
-
     public void insertNewLetters(GridPane grid, Board board) {
 
         grid.getChildren().stream().filter(n -> clicked.contains(n))
@@ -223,6 +220,6 @@ public class UiHelp {
                 GridPane.getRowIndex(n))
                 );
     }
-    
+
 
 }
