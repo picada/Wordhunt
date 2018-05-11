@@ -24,7 +24,6 @@ public class UserDao implements Dao<User, Integer> {
         database = db;
     }
     
-
     @Override
     public User findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -57,12 +56,6 @@ public class UserDao implements Dao<User, Integer> {
 
         return findByUsername(user.getUsername());
     }
-
-//    @Override
-//    public void delete(Integer key) throws SQLException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     /**
      *
      * Finds a user from the database based on the username
@@ -82,8 +75,10 @@ public class UserDao implements Dao<User, Integer> {
             if (!result.next()) {
                 return null;
             }
-
-            return new User(result.getString("username"), result.getString("name"));
+            User user = new User(result.getString("username"), result.getString("name"));
+            result.close();
+            conn.close();
+            return user;
         }
     }
 

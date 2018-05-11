@@ -140,6 +140,9 @@ public class WordhuntUi extends Application {
             if (username.length() < 4 || name.length() < 2) {
                 userCreationMessage.setText("Käyttäjätunnus tai nimi liian lyhyt");
                 userCreationMessage.setTextFill(Color.RED);
+            } else if (username.length() > 10 || name.length() > 50) {
+                userCreationMessage.setText("Käyttäjätunnus tai nimi liian pitkä");
+                userCreationMessage.setTextFill(Color.RED);
             } else {
                 try {
                     if (wordhunt.createUser(username, name)) {
@@ -186,7 +189,7 @@ public class WordhuntUi extends Application {
 
         Button ruleView = new Button("Säännöt");
         ruleView.setPadding(new Insets(10));
-        
+
         Button highscoreView = new Button("Huipputulokset");
         highscoreView.setPadding(new Insets(10));
 
@@ -203,7 +206,7 @@ public class WordhuntUi extends Application {
             primaryStage.setScene(ruleScene);
 
         });
-        
+
         highscoreView.setOnAction(e -> {
 
             primaryStage.setScene(scoreScene);
@@ -254,31 +257,30 @@ public class WordhuntUi extends Application {
         rulePane.setAlignment(Pos.CENTER);
         rules.setTextAlignment(TextAlignment.CENTER);
         ruleScene = new Scene(rulePane, 800, 700);
-        
+
         // highscore scene
-        
         BorderPane scorePane = new BorderPane();
         scorePane.setPadding(new Insets(10));
-        
+
         VBox personalHighscores = new VBox(10);
         personalHighscores.setPadding(new Insets(10));
         Label personalHighscoreLabel = new Label("Omat parhaat tulokset");
         personalHighscoreLabel.setPadding(new Insets(10));
         personalHighscores.setMinWidth(400);
-        
+
         personalHighscores.getChildren().addAll(personalHighscoreLabel, userTopTen);
-        
+
         VBox allHighscores = new VBox(10);
         allHighscores.setPadding(new Insets(10));
         Label allHighscoresLabel = new Label("Kaikkien pelaajien parhaat tulokset");
         allHighscoresLabel.setPadding(new Insets(10));
         allHighscores.setMinWidth(400);
-        
+
         allHighscores.getChildren().addAll(allHighscoresLabel, topTen);
-        
+
         Button backFromScores = new Button("Takaisin päävalikkoon");
         backFromScores.setPadding(new Insets(10));
-        
+
         backFromScores.setOnAction(e -> {
 
             primaryStage.setScene(mainScene);
@@ -292,7 +294,6 @@ public class WordhuntUi extends Application {
         scorePane.setRight(allHighscores);
 
         scoreScene = new Scene(scorePane, 800, 700);
-
 
         // (test) puzzle scene
         BorderPane puzzlePane = new BorderPane();
@@ -332,9 +333,7 @@ public class WordhuntUi extends Application {
         timeLeft.setStyle("-fx-font-weight: bold; -fx-font-size: 30;");
         bottom.getChildren().addAll(timeLeft);
 
-
         // functionality for start/shuffle, starts countdown when game started
-        
         startOrShuffle.setOnAction(e -> {
 
             countdown = help.startCountdownIfGameNotOn(countdown, wordhunt.getGame(), timeLeft);
@@ -345,18 +344,20 @@ public class WordhuntUi extends Application {
             countdown.setOnFinished(ee -> {
                 countdown.stop();
 
-                if (help.saveScore(wordhunt, countdown, timeLeft)) {
-                    backToMain.setText("Takaisin valikkoon");
-                    timeLeft.setText("Game Over\nPisteet:" + wordhunt.getGame().getPoints());
-                }
+                help.saveScore(wordhunt, backToMain, timeLeft);
+                puzzle.getChildren().clear();
+                wordhunt.setGame(10, 10, "sanalista.txt");
+                startOrShuffle.setText("Aloita uusi peli");
 
             });
 
-            help.startOrShuffleAction(wordhunt, points);
+            help.startOrShuffleAction(wordhunt.getGame(), points);
 
             word.setText("");
             startOrShuffle.setText("Sekoita pelilauta");
-            backToMain.setText("Keskeytä peli (tulosta ei tallenneta)");
+            if (!wordhunt.getGame().gameOver()) {
+                backToMain.setText("Keskeytä peli (tulosta ei tallenneta)");
+            }
             valid.setText("");
 
             help.updatePuzzle(wordhunt.getGame(), puzzle, word, valid);
@@ -364,9 +365,8 @@ public class WordhuntUi extends Application {
             primaryStage.setScene(puzzleScene);
 
         });
-        
-        // takes the user back to main
 
+        // takes the user back to main
         backToMain.setOnAction(e -> {
 
             primaryStage.setScene(mainScene);
@@ -374,25 +374,25 @@ public class WordhuntUi extends Application {
             backToMain.setText("Takaisin valikkoon");
             startOrShuffle.setText("Aloita peli");
             points.setText("");
-            countdown.stop();
+            if (countdown != null) {
+                countdown.stop();
+            }
 
         });
 
         options.getChildren().addAll(startOrShuffle, backToMain);
 
         // checks if the word is valid and saves points if true
-        
         sendWord.setOnAction(e -> {
 
             if (help.acceptedWord(wordhunt.getGame(), word, valid, points)) {
-                help.insertNewLetters(puzzle, wordhunt.getGame());
+                help.insertNewLetters(puzzle, wordhunt.getGame().getBoard());
                 help.updatePuzzle(wordhunt.getGame(), puzzle, word, valid);
             }
 
         });
-        
-        // clears current word
 
+        // clears current word
         clearWord.setOnAction(e -> {
 
             wordhunt.getGame().getCurrentword().clear();

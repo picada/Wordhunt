@@ -5,7 +5,6 @@ package wordhunt.database;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Statement;
 import org.junit.After;
@@ -51,21 +50,31 @@ public class UserDaoTest {
         assertEquals(two, users.create(two));
     }
     
+    @Test
+    public void existingUserIsFound() throws Exception {
+        User one = new User("chuckee", "Chuck Norris");
+        users.create(one);
+        assertEquals(one, users.findByUsername("chuckee"));
+    }
+    
+    @Test
+    public void nonExistingUserIsFound() throws Exception {
+        User user = users.findByUsername("notthere");
+        assertEquals(null, user);
+    }
+    
+    
     @After
     public void tearDown() {
         try (Connection conn = db.getConnection()) {
             Statement st = conn.createStatement();
             st.executeUpdate("DROP TABLE User");
             st.executeUpdate("DROP TABLE Score");
+            st.close();
             conn.close();
         } catch (Throwable t) {
             System.out.println("Error >> " + t.getMessage());
         }
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

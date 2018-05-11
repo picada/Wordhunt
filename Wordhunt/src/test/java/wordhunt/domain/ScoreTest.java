@@ -45,9 +45,4 @@ public class ScoreTest {
         assertEquals(one.getDate(), LocalDate.now());
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

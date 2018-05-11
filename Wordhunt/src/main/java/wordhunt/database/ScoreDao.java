@@ -50,7 +50,7 @@ public class ScoreDao implements Dao<Score, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Score> userTopTen(User user) throws SQLException {
+    public ArrayList<Score> userTopTen(User user) throws SQLException {
 
         ArrayList<Score> topTen = new ArrayList<Score>();
 
@@ -74,7 +74,7 @@ public class ScoreDao implements Dao<Score, Integer> {
         return topTen;
     }
     
-    public List<Score> topTen() throws SQLException {
+    public ArrayList<Score> topTen() throws SQLException {
 
         ArrayList<Score> topTen = new ArrayList<Score>();
 
@@ -112,13 +112,8 @@ public class ScoreDao implements Dao<Score, Integer> {
             scoreid = rs.getInt("id");
             rs.close();
         }
-        System.out.println(findOne(scoreid).getDate());
         return findOne(scoreid);
     }
 
-//    @Override
-//    public void delete(Integer key) throws SQLException {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
 }

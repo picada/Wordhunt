@@ -61,18 +61,20 @@ public class GameTest {
     
     @Test 
     public void mixBoardReducesPoints() {
-        game.setPoints(20);
+        game.startGame();
+        game.setPoints(6);
         game.mixBoard();
-        assertEquals(30, game.getPoints());
+        assertEquals(350, game.getPoints());
         game.mixBoard();
-        assertEquals(20, game.getPoints());
+        assertEquals(100, game.getPoints());
     }
     
     @Test 
     public void mixBoardDoesntTakePointsBelowZero() {
+       game.startGame();
        game.mixBoard();
        assertEquals(0, game.getPoints());
-       game.setPoints(2);
+       game.setPoints(3);
        game.mixBoard();
        assertEquals(0, game.getPoints());
     }

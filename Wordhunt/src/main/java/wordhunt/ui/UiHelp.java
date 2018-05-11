@@ -73,14 +73,14 @@ public class UiHelp {
                     valid.setText("");
     }
 
-    public void startOrShuffleAction(WordhuntService wordhunt, Label points) {
-        if (!wordhunt.getGame().getGameOn()) {
-            wordhunt.getGame().getBoard().setBoard();
-            wordhunt.getGame().startGame();
+    public void startOrShuffleAction(Game game, Label points) {
+        if (!game.getGameOn()) {
+            game.getBoard().setBoard();
+            game.startGame();
         } else {
-            wordhunt.getGame().mixBoard();
-            points.setText("" + wordhunt.getGame().getPoints());
-            wordhunt.getGame().getCurrentword().clear();
+            game.mixBoard();
+            points.setText("" + game.getPoints());
+            game.getCurrentword().clear();
         }
     }
 
@@ -101,16 +101,17 @@ public class UiHelp {
         return countdown;
     }
 
-    public boolean saveScore(WordhuntService wordhunt, Timeline countdown, Label timeLeft) {
-        if (wordhunt.getGame().gameOver()) {
-            try {
-                wordhunt.createScore(wordhunt.getGame().getPoints(), wordhunt.getLoggedUser(), LocalDate.now());
-                return true;
-            } catch (Exception ex) {
-                Logger.getLogger(WordhuntUi.class.getName()).log(Level.SEVERE, null, ex);
+    public void saveScore(WordhuntService wordhunt, Button backToMain, Label timeLeft) {
+        try {
+            if (wordhunt.createScore()) {
+            timeLeft.setText("Game Over\nPisteet:" + wordhunt.getGame().getPoints());
+            } else {
+                timeLeft.setText("Pisteiden tallennus epäonnistui");
             }
+            backToMain.setText("Takaisin valikkoon");
+        } catch (Exception ex) {
+            Logger.getLogger(UiHelp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
     }
 
     public boolean acceptedWord(Game game, Label word, Label valid, Label points) {
@@ -129,10 +130,10 @@ public class UiHelp {
         return false;
     }
 
-    public void insertNewLetters(GridPane grid, Game game) {
+    public void insertNewLetters(GridPane grid, Board board) {
 
         grid.getChildren().stream().filter(n -> clicked.contains(n))
-                .forEach(n -> game.getBoard().newRandomLetter(GridPane.getColumnIndex(n),
+                .forEach(n -> board.newRandomLetter(GridPane.getColumnIndex(n),
                 GridPane.getRowIndex(n))
                 );
     }

@@ -32,7 +32,7 @@ public class Game {
         this.currentword = new ArrayList<String>();
         this.collectedWords = new ArrayList<String>();
         setWordlist(wordlist);
-        this.time = 120;
+        this.time = 20;
         this.gameOn = false;
     }
 
@@ -80,10 +80,12 @@ public class Game {
      */
     public void mixBoard() {
         board.setBoard();
-        if (points <= 10) {
-            points = 0;
-        } else {
-            points -= 10;
+        if (gameOn) {
+            if (points <= 250) {
+                points = 0;
+            } else {
+                points -= 250;
+            }
         }
     }
 
@@ -203,7 +205,13 @@ public class Game {
      *
      */
     public void setPoints(int wordLength) {
-        this.points += wordLength * 2;
+        double multiplier = 50;
+        if (wordLength == 5) {
+            multiplier = 75;
+        } else if (wordLength >= 6) {
+            multiplier = 100;
+        }
+        this.points += wordLength * multiplier;
     }
 
     /**

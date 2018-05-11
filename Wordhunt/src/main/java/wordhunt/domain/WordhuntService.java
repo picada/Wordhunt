@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import wordhunt.database.ScoreDao;
 import wordhunt.database.UserDao;
@@ -167,11 +168,11 @@ public class WordhuntService {
      * 
      */
     
-    public boolean createScore(int points, User user, LocalDate date) throws Exception {
-        if (!this.getGame().gameOver()) {
+    public boolean createScore() throws Exception {
+        if (!this.game.gameOver()) {
             return false;
         }
-        Score score = new Score(points, user, date);
+        Score score = new Score(game.getPoints(), user, LocalDate.now());
         scores.create(score);
 
         return true;
@@ -188,7 +189,7 @@ public class WordhuntService {
      */
 
     public String printUserTopTen() throws Exception {
-        List<Score> topTen = scores.userTopTen(this.getLoggedUser());
+        ArrayList<Score> topTen = scores.userTopTen(this.getLoggedUser());
         StringBuilder s = new StringBuilder();
         s.append("Sija\t" + "Pisteet\t" + "Pvm\n");
         for (int i = 0; i < topTen.size(); i++) {
@@ -211,7 +212,7 @@ public class WordhuntService {
      */
 
     public String printTopTen() throws Exception {
-        List<Score> topTen = scores.topTen();
+        ArrayList<Score> topTen = scores.topTen();
         StringBuilder s = new StringBuilder();
         s.append("Sija\t" + "Käyttäjä\t" + "Pisteet\t" + "Pvm\n");
         for (int i = 0; i < topTen.size(); i++) {
