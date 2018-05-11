@@ -195,7 +195,7 @@ public class WordhuntService {
         for (int i = 0; i < topTen.size(); i++) {
             int place = i + 1;
             s.append(place + ".\t Pisteet: "
-                    + topTen.get(i).getPoints() + "/ päivämäärä: " + topTen.get(i).getDate() + "\n");
+                    + topTen.get(i).getPoints() + " / päivämäärä: " + topTen.get(i).getDate() + "\n");
         }
         return s.toString();
     }
