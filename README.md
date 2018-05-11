@@ -10,7 +10,7 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettu sovellus. 
 
 [Arkkitehtuurikuvaus](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/arkkitehtuuri.md)
 
-[Alustava käyttöohje](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/kayttoohje.md)
+[Käyttöohje](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/kayttoohje.md)
 
 [Testausdokumentti](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/testausdokumentti.md)
 
