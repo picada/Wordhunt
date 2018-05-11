@@ -61,3 +61,9 @@ Kun käyttäjä klikkaa pelinäkymässä pelin ollessa käynnissä painiketta "S
 
 Tapahtumakäsittelijä kutsuu käyttöliittymän apuluokan UiHelp metodia acceptedWord, joka saa parametrikseen tämän hetkisen pelin, pelissä tällä hetkellä kerättynä olevan sanan sekä käyttöliittymän Labelit valid ja points. Metodi tarkistaa onko löytyykö syötetty sana uusi ja löytyykö se käynnissä olevan pelin sanalistasta. Mikäli sana on hyväksytty, päivitetään pelin pistesaldo ja palautetaan käyttöliittymään true sekä siirretään päivitetyt tekstit labeleihin. Tämän jälkeen kutsutaan metodeja insertNewLetters ja updatePuzzle, jotka vastaavat peliruudukon päivittämisestä - ensimmäinen noutaa jälleen käynnissä olevan pelin ja sen pelilaudan sekä arpoo uudet kirjaimet sanassa sanassa valittuina olleiden tilalle, jälkimmäinen puolestaan päivittää käyttöliittymän puzzle-gridPanen vastaamaan uutta peliruudukkoa. Lopputuloksena käyttäjälle näkyy päivitetty puzzleScene.
 
+### Muut toiminnallisuudet
+
+Sama periaate toistuu sovelluksen kaikissa toiminnallisuuksissa, käyttöliittymän tapahtumakäsittelijä kutsuu joko suoraan tai käyttöliittymän apuluokan kautta sopivaa sovelluslogiikan metodia ja sovelluslogiikka pelin / käyttäjän / näkymien tilaa. Kontrollin palatessa käyttöliittymään päivitetään tarvittaessa käyttäjän näkymä.
+
+
+
