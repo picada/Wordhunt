@@ -1,10 +1,10 @@
-# Alustava käyttöohje
+# Käyttöohje
 
-Lataa tiedosto [wordhunt.jar](https://github.com/picada/otm-harjoitustyo/releases/download/viikko6/wordhunt.jar)
+Lataa tiedosto [wordhunt.jar](https://github.com/picada/otm-harjoitustyo/releases/tag/loppupalautus)
 
 ## Ohjelman käynnistäminen 
 
-Ohjelman olettaa, että käyttäjän tietokoneelle on asennettu SQLite. Muuta konfiguraatiota ei tarvita, pelin hyödyntämä sanalisa sekä säännöt on upotettu mukaan jar-tiedostoon.
+Ohjelman olettaa, että käyttäjän tietokoneelle on asennettu SQLite. Muuta konfiguraatiota ei tarvita, pelin hyödyntämä sanalisa sekä säännöt on upotettu mukaan jar-tiedostoon. Sovellus luo käyttämänsä tietokannan tarvittaessa käynnistäessä.
 
 ## Ohjelman käynnistäminen 
 
@@ -14,7 +14,7 @@ Ohjelma käynnistetään komennolla java -jar wordhunt.jar
 
 Sovellus käynnistyy kirjautumisnäkymään:
 
-KUVA
+<img src="https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/kuvat/kirjautuminen.png">
 
 Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus syötekenttään ja painamalla "Kirjaudu sisään".
 
@@ -59,13 +59,11 @@ KUVA
 
 Käyttäjän klikattua "Syötä sana" -nappia sovellus tarkistaa, löytyykö kyseinen sana sovellukseen ajetusta sanalistasta. Mikäli sana löytyy, pelaajan pistesaldo kasvaa ja valittujen kirjainten tilalle arvotaan uudet satunnaiset kirjaimet. Mikäli sana ei ole hyväksytty, ohjelma ilmoittaa tästä erikseen.
 
-KUVA?
-
 Käyttäjä voi koska tahansa tyhjentää valintansa painamalla "Tyhjennä valinnat".
 
 Käyttäjä voi missä tahansa vaiheessa peliä sekoittaa pelilaudan, mutta tämä vaikuttaa negatiivisesti pistesaldoon. Pistesaldo ei voi kuitenkaan mennä miinukselle.
 
-Kun pelikellon aika loppuu, tallentuvat pelin pisteet automaattisesti tietokantaan eikä käyttäjä pysty enää valitsemaan uusia sanoja. Pelaaja voi aloittaa uuden pelin päävalikon kautta. 
+Kun pelikellon aika loppuu, tallentuvat pelin pisteet automaattisesti tietokantaan eikä käyttäjä pysty enää valitsemaan uusia sanoja. Pelaaja voi halutessaan aloittaa uuden pelin samasta näkymästä.
 
 Mikäli käyttäjä poistuu pelistä kesken pelin, tulokset eivät tallennu tietokantaan ja peli nollautuu. 
 
