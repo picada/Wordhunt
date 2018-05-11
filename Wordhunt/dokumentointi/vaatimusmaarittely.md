@@ -2,28 +2,31 @@
 
 ## Sovelluksen tarkoitus
 
-Sovellus on sananetsintäpeli, jossa ideana on etsiä sovelluksen satunnaisesti asettelemasta kirjainpelilaudasta suomenkielisiä sanoja annetun ajan puitteissa. Peli peilaa käyttäjän löytämiä sanoja tietokantaan, joka on koostettu Kotimaisten Kielten Keskuksen julkaisemasta nykysuomen sanalistasta.
+Sovellus on sananetsintäpeli, jossa ideana on etsiä sovelluksen satunnaisesti asettelemasta kirjainpelilaudasta suomenkielisiä sanoja annetun ajan puitteissa. Peli peilaa käyttäjän löytämiä sanoja listaan, joka on koostettu Kotimaisten Kielten Keskuksen julkaisemasta nykysuomen sanalistasta.
 
-Pelin pelaaminen vaatii käyttäjätunnuksen luonnin ja kirjautumisen. Sovellus tallentaa käyttäjien keräämät kokonaispistemäärät sekä korkeimmat yksittäisestä pelistä saadun pistemäärät, ja näyttää parhaiden pelaajien ranking-taulukon kaikille pelaajille. Sovellusta voi käyttää useampi rekisteröitynyt pelaaja, ja jokaisella pelaajalla on oma highscorensa. 
+Pelin pelaaminen vaatii käyttäjätunnuksen luonnin ja kirjautumisen. Sovellus tallentaa käyttäjän tuloksen aina pelin päättyessa, ja käyttäjä voi tarkastella sovelluksen kautta sekä omia huipputuloksiaan että kaikkien pelaajien tuloksista koostettua ranking-listaa. Sovellusta voi käyttää useampi rekisteröitynyt pelaaja. 
 
 ## Käyttäjät
 
 Ainakin alkuvaiheessa sovelluksella on ainoastaan yksi käyttäjärooli eli _pelaaja_. 
 
-## Käyttöliittymäluonnos
+## Käyttöliittymä
 
-Tässä vaiheessa käyttöliittymäluonnosta ei ole vielä luotu. 
+Käyttöliittymä sisältää kuusi erillistä näkymää:
 
-Tarkoituksena on, että sovellus aukeaa kirjautumisnäkymään, jossa käyttäjä voi joko kirjautua sisään tai luoda uuden pelitunnuksen.
-
-Tämän jälkeen aukeaa näkymä, jossa käyttäjä voi joko aloittaa uuden pelin tai tarkastella omaa pelihistoriaansa.
+* Kirjautuminen
+* Uuden käyttäjän luonti
+* Päävalikko
+* Pelinäkymä
+* Huipputulokset
+* Säännöt
 
 ## Perusversion tarjoama toiminnallisuus
 
 ### Ennen kirjautumista
 
 - käyttäjä voi luoda itselleen pelaajatunnuksen
-  - käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 4 merkkiä
+  - käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan 4-8 merkkiä
 
 - käyttäjä voi kirjautua järjestelmään
   - kirjautuminen onnistuu syötettäessä olemassa oleva käyttäjätunnus kirjautumislomakkeelle
@@ -31,8 +34,9 @@ Tämän jälkeen aukeaa näkymä, jossa käyttäjä voi joko aloittaa uuden peli
 
 ### Kirjautumisen jälkeen
 
-- käyttäjä voi tarkastella top-listoja ja omia maksimipisteitään
+- käyttäjä voi tarkastella huipputuloksia
   - sovellus näyttää sekä käyttäjän parhaat pisteet että top-listan, joka muodostetaan kaikkein käyttäjien parhaista pisteistä
+  - molemmissa listoissa on maksimissaan 10 parasta pistetulosta
   
 - käyttäjä voi tarkastella pelin sääntöjä
 
@@ -45,14 +49,18 @@ Tämän jälkeen aukeaa näkymä, jossa käyttäjä voi joko aloittaa uuden peli
   - hyväksyttyyn sanaan lukeutuvat kirjainruudut poistetaan laudalta ja korvataan uusilla satunnaisilla kirjaimilla
 
 - käyttäjä saa pisteitä löytämistään sanoista
-  - alkuvaiheessa pisteitä kertyy jokaisesta kirjaimesta saman verran, kehitysvaiheessa pisteytystä jalostetaan niin, että pidemmissä sanoissa pistekerroin per kirjain on suurempi
-
-- käyttäjällä on käytössään x määrä sekoitusmahdollisuuksia, joilla ruudukon kirjaimet voi alustaa uudestaan
+  - pistekerroin on sitä suurempi, mitä pidempi sana on, tällä hetkellä kertoimet ovat seuraavat: 
+    - max 3 kirjainta: 30 pistettä / kirjain
+    - 4 kirjainta: 50 pistettä / kirjain
+    - 5 kirjainta: 75 pistettä / kirjain
+    - 6 kirjainta tai enemmän: 100 pistettä / kirjain
+  
+- käyttäjällä on käytössään rajoittamaton määrä sekoitusmahdollisuuksia, joilla ruudukon kirjaimet voi alustaa uudestaan
   - jokainen sekoitus kuitenkin vähentää pistesaldoa
 
 - käyttäjä voi keskeyttää pelin halutessaan, jolloin tulokset eivät tallennu
 
-- pelin loppuessa (=ajan kuluessa loppuun) pelin pisteet tallentuvat pelaajan pistesaldoon
+- pelin loppuessa (=ajan kuluessa loppuun) sovellus tallentaa pelaajan pisteet tietokantaan
 
 - käyttäjä voi kirjautua ulos
 
@@ -72,6 +80,7 @@ Perusversion jälkeen järjestelmää täydennetään voidaan täydentää esim.
 - käyttäjä voi nähdä pisimmän löytämänsä sanan (kaikkien pelattujen pelien joukosta)
 - käyttäjä voi nähdä pisimmän löydetyn sanan kaikkien pelaajien ja pelattujen pelien joukosta
 - sovellukseen voidaan lisätä myös suuremmilla oikeuksilla varustettuja pääkäyttäjiä, joilla oikeus hallinnoida muita käyttäjätilejä ja esim. lisätä uusia sanoja tietokantaan
+- eri sijamuotojen lisääminen sanalistaan
 - pelin laajentaminen useammille eri kielille
 
 
