@@ -1,6 +1,6 @@
 # Wordhunt
 
-Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus. Kyseessä on sananetsintäpeli, jossa ideana on etsiä sovelluksen satunnaisesti asettelemasta kirjainpelilaudasta suomenkielisiä sanoja annetun ajan puitteissa. 
+Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettu sovellus. Kyseessä on sananetsintäpeli, jossa ideana on etsiä sovelluksen satunnaisesti asettelemasta kirjainpelilaudasta suomenkielisiä sanoja annetun ajan puitteissa. 
 
 ## Dokumentaatio
 
@@ -12,9 +12,12 @@ Ohjelmistotekniikan menetelmät -kurssiin harjoitustyönä toteutettava sovellus
 
 [Alustava käyttöohje](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/testausdokumentti.md)
+
 ## Releaset
 
 [Viikko 5](https://github.com/picada/otm-harjoitustyo/releases/tag/viikko5)
+
 [Viikko 6](https://github.com/picada/otm-harjoitustyo/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
