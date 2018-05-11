@@ -16,6 +16,6 @@
 |2.5. | 4    | luokkien eriyttämistä, pistetilastojen siirto sovellukseen, lisää testejä, javadoc |
 |3.5. | 1    | dokumentaatiota |
 |8.5. | 1    | dokumentaatiota (arkkitehtuurikuvauksen ja käyttöohjeen päivitystä) |
-|10.5. | 3    | dokumentaatiota (dokumentaatiota, refaktorointia) |
-|11.5. | 4    | dokumentaatiota (dokumentaatiota, testejä, toiminnallisuuksien hiomista) |
-| yht   | 48    | 
+|10.5. | 3    | dokumentaatiota, refaktorointia |
+|11.5. | 6    | dokumentaatiota, testejä, toiminnallisuuksien hiomista, muuta viilausta |
+| yht   | 50    | 
