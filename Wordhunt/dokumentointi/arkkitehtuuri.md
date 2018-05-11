@@ -59,5 +59,5 @@ Kun käyttäjä klikkaa pelinäkymässä pelin ollessa käynnissä painiketta "S
 
 <img src="https://github.com/picada/otm-harjoitustyo/blob/master/Wordhunt/dokumentointi/sendWord2.png">
 
-Tapahtumakäsittelijä kutsuu käyttöliittymän apuluokan UiHelp metodia acceptedWord, joka saa parametrikseen tämän hetkisen pelin, pelissä tällä hetkellä kerättynä olevan sanan sekä käyttöliittymän Labelit valid ja points. acceptedWord puolestaan tarkistaa löytyykö syötetty sana käynnissä olevan pelin sanalistasta ... 
+Tapahtumakäsittelijä kutsuu käyttöliittymän apuluokan UiHelp metodia acceptedWord, joka saa parametrikseen tämän hetkisen pelin, pelissä tällä hetkellä kerättynä olevan sanan sekä käyttöliittymän Labelit valid ja points. Metodi tarkistaa onko löytyykö syötetty sana uusi ja löytyykö se käynnissä olevan pelin sanalistasta. Mikäli sana on hyväksytty, päivitetään pelin pistesaldo ja palautetaan käyttöliittymään true sekä siirretään päivitetyt tekstit labeleihin. Tämän jälkeen kutsutaan metodeja insertNewLetters ja updatePuzzle, jotka vastaavat peliruudukon päivittämisestä - ensimmäinen noutaa jälleen käynnissä olevan pelin ja sen pelilaudan sekä arpoo uudet kirjaimet sanassa sanassa valittuina olleiden tilalle, jälkimmäinen puolestaan päivittää käyttöliittymän puzzle-gridPanen vastaamaan uutta peliruudukkoa. Lopputuloksena käyttäjälle näkyy päivitetty puzzleScene.
 
